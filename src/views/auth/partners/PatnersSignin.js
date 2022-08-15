@@ -60,12 +60,10 @@ class PartnersSignin extends React.Component {
                         return null
                       }
                       email = email.toLowerCase()
-                      //1208 - Allow for credentials to work for all login pages.
-                      this.props.singleSignin({
+                      this.props.reqSigninUser({
                         email,
                         password,
                         history,
-                        type: 'recruiter'
                       })
                     }}
                   >

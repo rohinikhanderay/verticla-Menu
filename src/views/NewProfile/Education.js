@@ -90,7 +90,7 @@ export const Education = ({ selectedProfile }) => {
       <ToastContainer />
       <div className="flex flex-1 justify-between items-center">
         <h4 className="text-2xl leading-8 font-bold">Education</h4>
-        {selectedProfile?.education?.length > 0 && (
+        {selectedProfile?.education?.length && (
             <button
               className="text-white border-2 rounded-full border-teal-700 flex pl-2 pr-3 py-1"
               onClick={() => setIsEducationAddOpen(true)}

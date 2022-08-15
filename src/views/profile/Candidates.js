@@ -350,9 +350,9 @@ const history=useHistory()
                   <button className="xs:hidden md:hidden lg:hidden flex px-4 py-1 invisible font-medium font-bold  border h-11 border-solid border-black rounded mr-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="mr-2" fill="#16acb2" viewBox="0 0 24 24"><path d="M1 0l9 15.094v5.906l4 3v-8.906l9-15.094h-22zm18.479 2l-2.981 5h-8.996l-2.981-5h14.958z"></path>
                     </svg>Filter</button>
-                    <div className="relative w-full flex items-center">
-                       <div className="w-10/12 xs:w-full sm:text-center"  style={{cursor:'pointer'}} onClick={()=>{history.push(`/profiles/${item.id}`)}}>
+                    <div className="relative w-full flex items-center" style={{cursor:'pointer'}} onClick={()=>{history.push(`/profiles/${item.id}`)}}>
                         {/* // 1177 - clicked on search candidates worked on beyond components */}
+                       <div className="w-10/12 xs:w-full sm:text-center">
                          <div className="border  border-gray-400 p-4">
                             <div className=" w-full md:max-w-full md:flex m-auto  items-center">
                               <div className="h-36 w-36  sm:justify-center md:w-36 flex-none bg-cover   sm:m-auto  rounded-full  text-center overflow-hidden"

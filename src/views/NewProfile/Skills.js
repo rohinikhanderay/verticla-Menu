@@ -70,7 +70,7 @@ export const Skills = ({ selectedProfile }) => {
                 <div>
                     <div className="flex flex-1 justify-between items-center">
                         <h4 className="text-2xl leading-8 font-bold">Skills</h4>
-                        {selectedProfile?.skills?.length > 0 && (
+                        {selectedProfile?.skills?.length && (
                         <button
                             className="text-white border-2 rounded-full border-teal-700 flex pl-2 pr-3 py-1"
                             onClick={() => setIsSkillAddOpen(true)}

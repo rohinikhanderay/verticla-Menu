@@ -144,7 +144,7 @@ export const CareerJourney = ({ selectedProfile }) => {
           <h4 className="text-2xl leading-8 font-bold">
             Career Journey
           </h4>
-          {selectedProfile?.experience?.length > 0  && (
+          {selectedProfile?.experience?.length  && (
               <button
                 className="text-white border-2 rounded-full border-teal-700 flex pl-2 pr-3 py-1"
                 onClick={() => setIsCompanyAddOpen(true)}
@@ -164,7 +164,7 @@ export const CareerJourney = ({ selectedProfile }) => {
                 <h4 className="font-semibold text-lg leading-6 pb-1">
                   Next, I'am interested in being a {selectedProfile?.careerJourney.nextRole}
                 </h4>
-                {(selectedProfile?.careerJourney?.experience.length > 0 || selectedProfile?.careerJourney?.nextRole || selectedProfile?.careerJourney?.trainings?.length > 0) &&
+                {(selectedProfile?.careerJourney?.experience.length || selectedProfile?.careerJourney?.nextRole || selectedProfile?.careerJourney?.trainings?.length) &&
                   (<button
                     className="text-white"
                     onClick={() => onEditCareer(selectedProfile?.careerJourney)}
@@ -205,7 +205,7 @@ export const CareerJourney = ({ selectedProfile }) => {
               type="edit"
             />
           )}
-          {!isCareerAddOpen && selectedProfile?.careerJourney?.experience.length === 0 && !selectedProfile?.careerJourney?.nextRole && selectedProfile?.careerJourney?.training?.length === 0 && (
+          {!isCareerAddOpen && selectedProfile?.careerJourney?.experience.length === 0 && !selectedProfile?.careerJourney?.nextRole && selectedProfile?.careerJourney?.training?.length == 0 && (
             <div className="py-4">
               <div className="font-normal mb-2 text-lg leading-6">What do you want to do next in your career journey?</div>
               <button

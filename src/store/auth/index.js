@@ -39,12 +39,12 @@ export function adminLogin({ email, password, history }) {
       })
   }
 }
-//1208 - Allow for credentials to work for all login pages.
-export function singleSignin({ email, password, history, type = '' }) {
+
+export function signinUser({ email, password, history }) {
   return function (dispatch) {
     // Submit email/password to the server
     axios
-      .post(`${API_URL}/api/users/singleSignin`, { email, password })
+      .post(`${API_URL}/api/users/signin`, { email, password })
       .then((response) => {
         // If request is good...
         // - Update state to indicate user is authenticated
@@ -55,14 +55,45 @@ export function singleSignin({ email, password, history, type = '' }) {
 
         localStorage.setItem('email', email)
 
-        if (response.data.data.isProfile) {
+        if (response.data.data.isProfile == true) {
           history.push('/dashboard')
-        } else if(type === 'recruiter') {
+        }
+      })
+      .catch((error) => {
+        // If request is bad...
+        // - Show an error to the user
+        dispatch(authError(error?.response?.data?.data))
+      })
+  }
+}
+
+export function reqSigninUser({ email, password, history }) {
+  return function (dispatch) {
+    // Submit email/password to the server
+    axios
+      .post(`${API_URL}/api/users/reqSignin`, { email, password })
+      .then((response) => {
+        // If request is good...
+        // - Update state to indicate user is authenticated
+        dispatch({ type: AUTH_USER })
+        // - Save the JWT
+        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('exptTime', response.data.expTime)
+
+        localStorage.setItem('email', email)
+
+        if (response.data.data.isProfile == true) {
+          history.push('/dashboard')
+        } else {
           history.push({
             pathname: '/onboarding',
             state: { type: 'recruiter', status: true },
           })
         }
+
+        // });
+
+        // history.push("/dashboard");
       })
       .catch((error) => {
         // If request is bad...

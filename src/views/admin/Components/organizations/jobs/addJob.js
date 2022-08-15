@@ -305,7 +305,7 @@ const Addjob = (props) => {
                                 htmlFor="description"
                                 className="block text-sm font-medium text-gray-700"
                               >
-                                Upload an existing job description from a file. An acceptable file format to upload is docx.
+                                Upload a job description
                               </label>
                               <span
                                 style={{

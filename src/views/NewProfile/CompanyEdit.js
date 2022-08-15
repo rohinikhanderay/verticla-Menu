@@ -62,7 +62,7 @@ export const CompanyEdit = ({ onConfirm, onClose, editData, type, currentWorkExi
         <DeleteConfirmModal
           onClose={onDeleteClose}
           onConfirm={onDeleteConfirmation}
-          title={`Delete Experience`}
+          title={`Delete Award`}
         >
           <p className="p-4">Are you sure you want to remove this?</p>
         </DeleteConfirmModal>
