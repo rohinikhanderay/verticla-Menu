@@ -1,0 +1,12 @@
+export const SUBMIT_PROFILE = "submit_profile";
+export const GET_PROFILE = "get_profile";
+export const VIEW_PROFILE = "view_profile";
+export const PROFILE_ERROR = "profile_error";
+export const GET_IMAGES = "get_story_imges";
+export const UPDATE_PROFILE = "profile_update";
+export const GET_INTEREST_IMAGES = "get_interest_imges";
+export const UPDATE_RESUME_SUCCESS = "update_resume_success";
+export const VIEW_TRENDING_SKILL = "get_trending_skill";
+export const VIEW_SUGGESTION_SKILL = "get_suggestion_skill";
+export const VIEW_RECOMMANDED_SKILL = "get_recommanded_skill";
+export const GET_CANDIDATES = "get_candidates";
