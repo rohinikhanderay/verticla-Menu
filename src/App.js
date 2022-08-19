@@ -70,6 +70,7 @@ import { useDispatch } from 'react-redux'
 import { socketEstablish } from './store/chat/index'
 import PrivateRoute from './utils/private_route'
 import Leaderboard from "./views/leaderboard/Leaderboard";
+import DashboardNew from './views/Dashboard_new/DashboardNew'
 
 function App() {
   const store = createStore(
@@ -88,6 +89,10 @@ function App() {
   }
 
   return (
+
+    // <DashboardNew />
+
+    // <Example />
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop>
@@ -204,12 +209,12 @@ function App() {
               exact 
             />
 
-            <Route path="/dashboard" component={withTracker(RequireAuth(Dashboard))} exact />
+            <Route path="/dashboard" component={withTracker(RequireAuth(DashboardNew))} exact />
             <Route path="/privacypolicy" component={withTracker(PrivacyPolicy)} exact />
             <Route path="/termsofuse" component={withTracker(TermsOfUse)} exact />
             <Route
               path="/dashboard"
-              component={withTracker(RequireAuth(Dashboard))}
+              component={withTracker(RequireAuth(DashboardNew))}
               exact
             />
             <Route

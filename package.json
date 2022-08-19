@@ -2,7 +2,7 @@
     "name": "nuleep-web-app",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://localhost:5000/",
+    "proxy": "https://localhost:5000/",
     "dependencies": {
         "@craco/craco": "^5.9.0",
         "@headlessui/react": "^1.2.0",
@@ -90,6 +90,8 @@
         ]
     },
     "devDependencies": {
+        "@iconify/icons-heroicons-outline": "^1.2.2",
+        "@iconify/react": "^3.2.2",
         "autoprefixer": "^9.8.6",
         "postcss": "^8.4.14",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4"

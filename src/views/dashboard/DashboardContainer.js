@@ -9,9 +9,13 @@ import RecruiterDashboard from './recruiterDashboard'
 import { socketEstablish } from '../../store/chat/index'
 import Unapproved from '../../components/layouts/unApprove'
 import BetaSign from '../../components/layouts/betaSignage'
+
 const Dashboard = ({ getProfile, profile, history }) => {
   const dispatch = useDispatch()
   const sockets = useSelector((state) => state.chat)
+
+  const state = useSelector(state => state)
+
   useEffect(() => {
     getProfile()
   }, [getProfile])

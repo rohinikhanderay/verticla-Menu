@@ -24,7 +24,7 @@ const JobSeekerDashboard = ({
 
   return (
     <div className="pb-48">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="max-w-5xl px-2 mx-auto sm:px-4 lg:px-8 font-inter">
         <div className="h-40 px-10 pt-12 mt-12 bg-yellow-200 rounded-md shadow-lg md:h-64">

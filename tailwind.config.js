@@ -22,7 +22,8 @@ module.exports = {
         bg_yellow: "#FFF7B2",
         border_yellow: "#FFD338",
         border_gray:'#cccccc',
-        disable_bg_color: '#E6E6E6'
+        disable_bg_color: '#E6E6E6',
+        bg_white: '#FFFFFF'
       },
 
       screens: {
@@ -52,6 +53,10 @@ module.exports = {
       height: {
         '83vh': '83vh',
       },
+
+      borderRadius: {
+        default: '5px'
+      }
     },
   },
 

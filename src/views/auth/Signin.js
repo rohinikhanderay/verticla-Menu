@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import BetaSignage from '../../components/layouts/betaSignage'
 
 class Signin extends React.Component {
+
   componentDidMount() {
     this.props.clearErrors()
   }
@@ -21,6 +22,7 @@ class Signin extends React.Component {
       )
     }
   }
+  
   render() {
     return (
       <>
