@@ -23,7 +23,8 @@ module.exports = {
         border_yellow: "#FFD338",
         border_gray:'#cccccc',
         disable_bg_color: '#E6E6E6',
-        bg_white: '#FFFFFF'
+        bg_white: '#FFFFFF',
+        bg_gray666: '#666666'
       },
 
       screens: {
@@ -56,6 +57,14 @@ module.exports = {
 
       borderRadius: {
         default: '5px'
+      },
+
+      padding: {
+        '1px': '1px'
+      },
+
+      fontSize: {
+        '13px': '13px'
       }
     },
   },

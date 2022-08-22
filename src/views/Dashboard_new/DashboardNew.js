@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon, DocumentSearchIcon, AcademicCapIcon, CogIcon, LogoutIcon } from '@heroicons/react/outline'
-import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/react/solid'
+import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon, DocumentSearchIcon, AcademicCapIcon, CogIcon, LogoutIcon,  } from '@heroicons/react/outline'
+import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon, HomeIcon as HomeSolid } from '@heroicons/react/solid'
 import NuleepLogo from '../../assets/images/Nuleep-Logo.svg';
+import NuleepText from '../../assets/images/Nuleep-Text.svg';
 import CloseIcon from '../../assets/images/icons/close_icon.svg'
 import hamburger from '../../assets/images/Hamburger.svg';
 import * as actions from '../../store/profile'
@@ -11,10 +12,11 @@ import { connect, useSelector } from 'react-redux'
 import recruiterDashboard from '../dashboard/recruiterDashboard';
 import JobSeekerDashboard from '../dashboard/jobSeekerDashboard';
 import Dashboard from '../dashboard/DashboardContainer'
+import RecruiterDashboard from '../dashboard/recruiterDashboard';
 
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false },
+  { name: 'Home', href: '#', icon: HomeIcon, current: true, iconFilled: HomeSolid },
+  { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: DocumentSearchIcon },
   { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false },
   { name: 'Settings', href: '#', icon: CogIcon, current: false },
   { name: 'Log out', href: '#', icon: LogoutIcon, current: false }
@@ -84,7 +86,7 @@ const DashboardNew = ({ getProfile }) => {
   const userRender = (data) => {
     return (
       <div className='flex items-center'>
-        <div className="w-6 h-6 bg-blue-100 rounded-full">
+        <div className="w-7 h-7 bg-blue-100 rounded-full">
           {data?.profileImg[0] ? (
             <div
               style={{
@@ -156,41 +158,27 @@ const DashboardNew = ({ getProfile }) => {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
-                  <Transition.Child
-                    as={Fragment}
-                    enter="ease-in-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in-out duration-300"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <div className="absolute top-0 right-0 -mr-12 pt-2">
-                      <button
-                        type="button"
-                        className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        onClick={() => setSidebarOpen(false)}
-                      >
-                        <span className="sr-only">Close sidebar</span>
-                        <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
-                      </button>
-                    </div>
-                  </Transition.Child>
+                <Dialog.Panel className="relative flex-1 flex flex-col w-full pt-5 pb-4 bg-white">
                   <div className="border-b pb-3 flex-shrink-0 flex items-center px-4">
                     <span className="flex w-full justify-between items-center">
                       <span className="flex min-w-0 items-center justify-between">
                         <img
-                          className="w-4 h-4 bg-gray-300 rounded flex-shrink-0"
+                          className="w-6 h-6 bg-gray-300 rounded flex-shrink-0"
                           src={NuleepLogo}
                           alt=""
                         />
                         <span className="flex-1 flex flex-col min-w-0">
-                          <span className="text-gray-900 text-xs font-medium truncate">Leep</span>
+                          <span className="text-gray-900 text-xs font-medium truncate">
+                            <img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' />
+                          </span>
                         </span>
                       </span>
 
                     </span>
+
+                    <img src={CloseIcon} className='w-5 h-5' onClick={() => {
+                      setSidebarOpen(false)
+                    }} />
 
 
                   </div>
@@ -203,7 +191,7 @@ const DashboardNew = ({ getProfile }) => {
                     } */}
 
                     <div className='flex items-center px-4 py-3 bg-gray-100'>
-                      <div className="w-6 h-6 bg-blue-100 rounded-full">
+                      <div className="w-5 h-5 bg-blue-100 rounded-full">
                         {state?.profile?.profile?.profileImg[0] ? (
                           <div
                             style={{
@@ -240,7 +228,7 @@ const DashboardNew = ({ getProfile }) => {
 
                   </div>
                   <div className="flex-1 h-0 overflow-y-auto">
-                    <nav className="px-2 mt-5">
+                    <nav className="mt-5">
                       <div className="space-y-1">
                         {navigation.map((item) => (
                           <a
@@ -250,18 +238,35 @@ const DashboardNew = ({ getProfile }) => {
                               item.current
                                 ? 'bg-gray-100 text-gray-900'
                                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                              'group flex items-center px-2 py-2 leading-5 font-semibold rounded-md text-xs'
+                              'group flex items-center leading-5 font-semibold rounded-md text-xs'
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
-                            <item.icon
-                              className={classNames(
-                                item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                'mr-3 flex-shrink-0 h-5 w-5'
-                              )}
-                              aria-hidden="true"
-                            />
-                            {item.name}
+
+                            <div className='flex'>
+                              <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
+                              <div className='flex px-2 py-3 text-bg_gray666 text-13px'>
+                                {
+                                  item.current ? <item.icon
+                                    className={classNames(
+                                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                                      'mr-3 flex-shrink-0 h-5 w-5'
+                                    )}
+                                    aria-hidden="true"
+                                  /> : <item.icon
+                                    className={classNames(
+                                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                                      'mr-3 flex-shrink-0 h-5 w-5'
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                }
+
+                                {item.name}
+                              </div>
+
+                            </div>
+
                           </a>
                         ))}
                       </div>
@@ -269,9 +274,7 @@ const DashboardNew = ({ getProfile }) => {
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
-              <div className="flex-shrink-0 w-14" aria-hidden="true">
-                {/* Dummy element to force sidebar to shrink to fit close icon */}
-              </div>
+
             </div>
           </Dialog>
         </Transition.Root>
@@ -294,12 +297,12 @@ const DashboardNew = ({ getProfile }) => {
                   <span className="flex w-full justify-between items-center">
                     <span className="flex min-w-0 items-center justify-between">
                       <img
-                        className="w-7 h-7 bg-gray-300 rounded flex-shrink-0"
+                        className="w-7 h-7 rounded flex-shrink-0"
                         src={NuleepLogo}
                         alt=""
                       />
                       <span className="flex-1 flex flex-col min-w-0">
-                        <span className="text-gray-900 text-sm font-medium truncate">Leep</span>
+                        <span className="text-sm font-medium truncate"><img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' /></span>
                       </span>
                     </span>
 
@@ -338,7 +341,7 @@ const DashboardNew = ({ getProfile }) => {
                 </div>
               </div> */}
             {/* Navigation */}
-            <nav className="px-3 mt-1">
+            <nav className="mt-1 pl-1px">
               <div className="space-y-1">
                 {navigation.map((item) => (
                   <a
@@ -346,18 +349,24 @@ const DashboardNew = ({ getProfile }) => {
                     href={item.href}
                     className={classNames(
                       item.current ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                      'group flex items-center text-sm font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >
-                    <item.icon
-                      className={classNames(
-                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                        'mr-3 flex-shrink-0 h-5 w-5 mx-2'
-                      )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
+                    <div className='flex'>
+                      {/* w-1 bg-black */}
+                      <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
+                      <div className='flex px-2 py-4 text-bg_gray666 text-13px'>
+                        <item.icon
+                          className={classNames(
+                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                            'mr-3 flex-shrink-0 h-5 w-5 mx-2'
+                          )}
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </div>
+                    </div>
                   </a>
                 ))}
               </div>
@@ -379,7 +388,9 @@ const DashboardNew = ({ getProfile }) => {
               <span className='flex flex-row items-center'>
                 <img src={NuleepLogo} className='w-5 h-5' />
                 <span className="">
-                  <span className="text-gray-900 text-sm font-medium truncate">Leep</span>
+                  <span className="text-sm font-medium truncate">
+                    <img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' />
+                  </span>
                 </span>
               </span>
             </button>
@@ -398,7 +409,6 @@ const DashboardNew = ({ getProfile }) => {
                         src={hamburger}
                         alt=""
                         onClick={() => {
-                          console.log("clicking")
                           setSidebarOpen(true)
                         }}
                       />
@@ -422,8 +432,9 @@ const DashboardNew = ({ getProfile }) => {
             {/* Projects list (only on smallest breakpoint) */}
             <div className="mt-10 sm:hidden">
               {
-                !state?.profile.loading && 
-                
+                !state?.profile.loading &&
+                state.profile &&
+                state?.profile?.profile?.userRef.role === "jobSeeker" &&
                 <JobSeekerDashboard profile={state.profile} />
               }
 
@@ -432,7 +443,11 @@ const DashboardNew = ({ getProfile }) => {
             {/* Projects table (small breakpoint and up) */}
             <div className="hidden mt-8 sm:block">
               {
-                !state?.profile.loading && <JobSeekerDashboard profile={state.profile} />
+                !state?.profile.loading &&
+                state.profile &&
+                state?.profile?.profile?.userRef.role === "jobSeeker" &&
+                <JobSeekerDashboard profile={state.profile} />
+
               }
             </div>
           </main>
