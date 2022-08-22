@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon, DocumentSearchIcon, AcademicCapIcon, CogIcon, LogoutIcon,  } from '@heroicons/react/outline'
+import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon, DocumentSearchIcon, AcademicCapIcon, CogIcon, LogoutIcon, } from '@heroicons/react/outline'
 import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon, HomeIcon as HomeSolid } from '@heroicons/react/solid'
 import NuleepLogo from '../../assets/images/Nuleep-Logo.svg';
 import NuleepText from '../../assets/images/Nuleep-Text.svg';
@@ -13,14 +13,18 @@ import recruiterDashboard from '../dashboard/recruiterDashboard';
 import JobSeekerDashboard from '../dashboard/jobSeekerDashboard';
 import Dashboard from '../dashboard/DashboardContainer'
 import RecruiterDashboard from '../dashboard/recruiterDashboard';
+import Jobs from '../jobs/Jobs';
+import Skill from '../profile/Skill';
 
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true, iconFilled: HomeSolid },
+  { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeSolid },
   { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: DocumentSearchIcon },
   { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false },
   { name: 'Settings', href: '#', icon: CogIcon, current: false },
   { name: 'Log out', href: '#', icon: LogoutIcon, current: false }
 ]
+
+
 
 
 const projects = [
@@ -73,9 +77,8 @@ const DashboardNew = ({ getProfile }) => {
 
   const state = useSelector(state => state)
 
-  console.log(state)
-
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(navigation[0])
 
   let history = useHistory();
 
@@ -83,7 +86,15 @@ const DashboardNew = ({ getProfile }) => {
     getProfile()
   }, [getProfile])
 
+  const onSelectItem = (item) => {
+    setSidebarOpen(false)
+    setSelectedItem(item)
+  }
+
   const userRender = (data) => {
+
+
+
     return (
       <div className='flex items-center'>
         <div className="w-7 h-7 bg-blue-100 rounded-full">
@@ -231,11 +242,12 @@ const DashboardNew = ({ getProfile }) => {
                     <nav className="mt-5">
                       <div className="space-y-1">
                         {navigation.map((item) => (
-                          <a
+                          <div
+                            onClick={() => onSelectItem(item)}
                             key={item.name}
                             href={item.href}
                             className={classNames(
-                              item.current
+                              selectedItem.name === item.name
                                 ? 'bg-gray-100 text-gray-900'
                                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                               'group flex items-center leading-5 font-semibold rounded-md text-xs'
@@ -243,7 +255,7 @@ const DashboardNew = ({ getProfile }) => {
                             aria-current={item.current ? 'page' : undefined}
                           >
 
-                            <div className='flex'>
+                            <div className='flex' >
                               <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                               <div className='flex px-2 py-3 text-bg_gray666 text-13px'>
                                 {
@@ -267,7 +279,7 @@ const DashboardNew = ({ getProfile }) => {
 
                             </div>
 
-                          </a>
+                          </div>
                         ))}
                       </div>
                     </nav>
@@ -345,10 +357,11 @@ const DashboardNew = ({ getProfile }) => {
               <div className="space-y-1">
                 {navigation.map((item) => (
                   <a
+                    onClick={() => onSelectItem(item)}
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                      selectedItem.name === item.name ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                       'group flex items-center text-sm font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
@@ -423,7 +436,7 @@ const DashboardNew = ({ getProfile }) => {
             {/* Page title & actions */}
             <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
               <div className="flex-1 min-w-0">
-                <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
+                <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{selectedItem.name}</h1>
               </div>
             </div>
             {/* Pinned projects */}
@@ -432,10 +445,15 @@ const DashboardNew = ({ getProfile }) => {
             {/* Projects list (only on smallest breakpoint) */}
             <div className="mt-10 sm:hidden">
               {
+                selectedItem.name === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
                 state?.profile?.profile?.userRef.role === "jobSeeker" &&
                 <JobSeekerDashboard profile={state.profile} />
+              }   
+              {
+                selectedItem.name === 'Job Search' && 
+                  <Jobs />
               }
 
             </div>
@@ -443,12 +461,21 @@ const DashboardNew = ({ getProfile }) => {
             {/* Projects table (small breakpoint and up) */}
             <div className="hidden mt-8 sm:block">
               {
+                selectedItem.name === 'Home' && 
                 !state?.profile.loading &&
                 state.profile &&
                 state?.profile?.profile?.userRef.role === "jobSeeker" &&
                 <JobSeekerDashboard profile={state.profile} />
 
               }
+              {
+                selectedItem.name === 'Job Search' && 
+                  <Jobs />
+              }
+              {/* {
+                selectedItem.name === 'Career Development' &&
+                  <Skill />
+              } */}
             </div>
           </main>
         </div>
