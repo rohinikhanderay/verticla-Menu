@@ -6,6 +6,7 @@ import jobsReducer from './job/reducer'
 import applicationReducer from './application/reducer'
 import chatreducer from './chat/reducer'
 import notifications from './notifications/reducer'
+import ComponentReducer from './Component/ComponentReducer'
 import blog from './blog/reducer'
 import event from './event/reducer'
 import { UNAUTH_USER } from './auth/types'
@@ -20,6 +21,7 @@ const combinedReducer = combineReducers({
   notifications: notifications,
   blog: blog,
   event: event,
+  component: ComponentReducer
 })
 
 const rootReducer = (state, action) => {

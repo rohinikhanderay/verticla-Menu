@@ -1,14 +1,18 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useMemo } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon, DocumentSearchIcon, AcademicCapIcon, CogIcon, LogoutIcon, } from '@heroicons/react/outline'
-import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon, HomeIcon as HomeSolid } from '@heroicons/react/solid'
+import { ChevronRightIcon, DotsVerticalIcon, SearchIcon, SelectorIcon } from '@heroicons/react/solid'
 import NuleepLogo from '../../assets/images/Nuleep-Logo.svg';
 import NuleepText from '../../assets/images/Nuleep-Text.svg';
-import CloseIcon from '../../assets/images/icons/close_icon.svg'
+import CloseIcon from '../../assets/images/icons/close_icon.svg';
+import HomeFilled from '../../assets/images/Home-Filled.svg';
 import hamburger from '../../assets/images/Hamburger.svg';
+import JobSearchFilled from '../../assets/images/Job-Search-Filled.svg';
+import CarrerDevelopmentFilled from '../../assets/images/CarrerDevelopment.svg';
+import SettingsFilled from '../../assets/images/Settings.svg';
 import * as actions from '../../store/profile'
 import { useHistory, withRouter } from "react-router-dom";
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import recruiterDashboard from '../dashboard/recruiterDashboard';
 import JobSeekerDashboard from '../dashboard/jobSeekerDashboard';
 import Dashboard from '../dashboard/DashboardContainer'
@@ -17,11 +21,11 @@ import Jobs from '../jobs/Jobs';
 import Skill from '../profile/Skill';
 
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeSolid },
-  { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: DocumentSearchIcon },
-  { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false },
-  { name: 'Settings', href: '#', icon: CogIcon, current: false },
-  { name: 'Log out', href: '#', icon: LogoutIcon, current: false }
+  { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeFilled },
+  { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
+  { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
+  { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
+  { name: 'Log out', href: '#', icon: LogoutIcon, current: false, iconFilled: LogoutIcon }
 ]
 
 
@@ -75,10 +79,13 @@ function classNames(...classes) {
 
 const DashboardNew = ({ getProfile }) => {
 
+  const dispatch = useDispatch()
   const state = useSelector(state => state)
+  const component = useSelector(state => state.component)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(navigation[0])
+  const [subLinks, setSubLinks] = useState()
 
   let history = useHistory();
 
@@ -86,9 +93,20 @@ const DashboardNew = ({ getProfile }) => {
     getProfile()
   }, [getProfile])
 
+
+
+  useEffect(() => {
+    dispatch({ type: 'Home' })
+  }, [])
+
   const onSelectItem = (item) => {
     setSidebarOpen(false)
     setSelectedItem(item)
+  }
+
+  const updateSublink = (componentName) => {
+
+    setSubLinks(componentName)
   }
 
   const userRender = (data) => {
@@ -243,7 +261,11 @@ const DashboardNew = ({ getProfile }) => {
                       <div className="space-y-1">
                         {navigation.map((item) => (
                           <div
-                            onClick={() => onSelectItem(item)}
+                            onClick={() => {
+                              dispatch({ type: item.name })
+                              onSelectItem(item)
+                            }
+                            }
                             key={item.name}
                             href={item.href}
                             className={classNames(
@@ -259,7 +281,7 @@ const DashboardNew = ({ getProfile }) => {
                               <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                               <div className='flex px-2 py-3 text-bg_gray666 text-13px'>
                                 {
-                                  item.current ? <item.icon
+                                  selectedItem.name === item.name ? <img src={item.iconFilled}
                                     className={classNames(
                                       item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                                       'mr-3 flex-shrink-0 h-5 w-5'
@@ -357,7 +379,10 @@ const DashboardNew = ({ getProfile }) => {
               <div className="space-y-1">
                 {navigation.map((item) => (
                   <a
-                    onClick={() => onSelectItem(item)}
+                    onClick={() => {
+                      dispatch({ type: item.name })
+                      onSelectItem(item)
+                    }}
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -370,13 +395,22 @@ const DashboardNew = ({ getProfile }) => {
                       {/* w-1 bg-black */}
                       <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                       <div className='flex px-2 py-4 text-bg_gray666 text-13px'>
-                        <item.icon
-                          className={classNames(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-3 flex-shrink-0 h-5 w-5 mx-2'
-                          )}
-                          aria-hidden="true"
-                        />
+                        {
+                          selectedItem.name === item.name ? <img src={item.iconFilled}
+                            className={classNames(
+                              item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                              'mr-3 flex-shrink-0 h-4 w-4 ml-2'
+                            )}
+                            aria-hidden="true"
+                          /> : <item.icon
+                            className={classNames(
+                              item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                              'mr-3 flex-shrink-0 h-5 w-5 mx-2'
+                            )}
+                            aria-hidden="true"
+                          />
+                        }
+
                         {item.name}
                       </div>
                     </div>
@@ -445,15 +479,15 @@ const DashboardNew = ({ getProfile }) => {
             {/* Projects list (only on smallest breakpoint) */}
             <div className="mt-10 sm:hidden">
               {
-                selectedItem.name === 'Home' &&
+                component.componentName === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
                 state?.profile?.profile?.userRef.role === "jobSeeker" &&
-                <JobSeekerDashboard profile={state.profile} />
-              }   
+                <JobSeekerDashboard profile={state.profile} updateSublink={updateSublink} />
+              }
               {
-                selectedItem.name === 'Job Search' && 
-                  <Jobs />
+                component.componentName === 'Job Search' &&
+                <Jobs />
               }
 
             </div>
@@ -461,7 +495,7 @@ const DashboardNew = ({ getProfile }) => {
             {/* Projects table (small breakpoint and up) */}
             <div className="hidden mt-8 sm:block">
               {
-                selectedItem.name === 'Home' && 
+                component.componentName === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
                 state?.profile?.profile?.userRef.role === "jobSeeker" &&
@@ -469,8 +503,8 @@ const DashboardNew = ({ getProfile }) => {
 
               }
               {
-                selectedItem.name === 'Job Search' && 
-                  <Jobs />
+                component.componentName === 'Job Search' &&
+                <Jobs />
               }
               {/* {
                 selectedItem.name === 'Career Development' &&

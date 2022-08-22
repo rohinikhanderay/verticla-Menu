@@ -1439,7 +1439,7 @@ const Jobs = ({ jobs, profile }) => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   )
 }

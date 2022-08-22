@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import * as applicationActions from '../../store/application'
 import * as profileActions from '../../store/profile'
 import BetaSignage from '../../components/layouts/betaSignage'
+import {useSelector, useDispatch} from 'react-redux'
 // import { ArrowCircleRightIcon } from '@heroicons/react/outline';
 
 const JobSeekerDashboard = ({
@@ -14,6 +15,7 @@ const JobSeekerDashboard = ({
   application,
   profile,
   loginVal,
+  updateSublink,
 }) => {
   useEffect(() => {
     getProfileApplications()
@@ -21,6 +23,9 @@ const JobSeekerDashboard = ({
   }, [getProfileApplications, getProfile])
 
   const firstThreeApplications = application.applications.slice(0, 3)
+
+  const dispatch = useDispatch()
+
 
   return (
     <div className="pb-48">
@@ -134,8 +139,12 @@ const JobSeekerDashboard = ({
 
         {/* Action Items */}
         <div className="grid gap-4 mt-8 text-white grid-cols-2 sm:grid-cols-1">
-          <Link
-            to="/jobs"
+          <div
+          onClick={() => {
+            console.log("on click is getting executed")
+            updateSublink('Job Search')
+            dispatch({type: 'Job Search'})
+          }}
             className="relative h-48 p-6 overflow-hidden bg-red-400 rounded-md shadow-md"
           >
             <div className="flex flex-col content-between">
@@ -177,7 +186,7 @@ const JobSeekerDashboard = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>
+          </div>
           <Link
             to="/applications"
             className="relative h-48 p-6 overflow-hidden bg-yellow-400 rounded-md shadow-md"
