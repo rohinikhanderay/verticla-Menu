@@ -24,6 +24,8 @@ import Blogs from '../blogs/index'
 import Jobs from '../jobs/Jobs';
 import Skill from '../profile/Skill';
 import Application from '../applications/Application';
+import PrivacyPolicy from '../landingPages/PrivacyPolicy';
+import TermsOfUse from '../landingPages/TermsOfUse';
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
@@ -124,6 +126,7 @@ const DashboardNew = ({ getProfile }) => {
 
     return (
       <div className='flex items-center cursor-pointer' onClick={() => {
+        setSidebarOpen(false)
         dispatch({ type: 'title', title: 'My Profile' })
         dispatch({ type: 'Profile' })
       }}>
@@ -231,7 +234,11 @@ const DashboardNew = ({ getProfile }) => {
                         : state?.profile?.profile)
                     } */}
 
-                    <div className='flex items-center px-4 py-3 bg-gray-100'>
+                    <div className='flex items-center px-4 py-3 bg-gray-100 cursor-pointer' onClick={() => {
+                      setSidebarOpen(false)
+                      dispatch({ type: 'title', title: 'My Profile' })
+                      dispatch({ type: 'Profile' })
+                    }}>
                       <div className="w-5 h-5 bg-blue-100 rounded-full">
                         {state?.profile?.profile?.profileImg[0] ? (
                           <div
@@ -321,8 +328,16 @@ const DashboardNew = ({ getProfile }) => {
                     <div>
                       <hr />
                       <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
-                        <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer'>Privacy Policy</label>
-                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer'>Terms and Conditions</label>
+                        <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer' onClick={() => {
+                          dispatch({ type: 'title', title: 'Privacy Policy' })
+                          dispatch({ type: 'Privacy' })
+                          setSidebarOpen(false)
+                        }}>Privacy Policy</label>
+                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer' onClick={() => {
+                          dispatch({ type: 'title', title: 'Terms of Use' })
+                          dispatch({ type: 'Terms of Use' })
+                          setSidebarOpen(false)
+                        }}>Terms and Conditions</label>
                         <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer'>&copy;2022 Nuleep</label>
                       </div>
 
@@ -460,8 +475,14 @@ const DashboardNew = ({ getProfile }) => {
           <div>
             <hr />
             <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
-              <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer'>Privacy Policy</label>
-              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer'>Terms and Conditions</label>
+              <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer' onClick={() => {
+                dispatch({ type: 'title', title: 'Privacy Policy' })
+                dispatch({ type: 'Privacy' })
+              }}>Privacy Policy</label>
+              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer' onClick={() => {
+                dispatch({ type: 'title', title: 'Terms of Use' })
+                dispatch({ type: 'Terms of Use' })
+              }}>Terms and Conditions</label>
               <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer'>&copy;2022 Nuleep</label>
             </div>
 
@@ -559,6 +580,16 @@ const DashboardNew = ({ getProfile }) => {
                 <Application profile_Id={state.profile.profile._id} />
               }
 
+              {
+                component.componentName === 'Privacy' &&
+                <PrivacyPolicy appId={component.appId} />
+              }
+
+              {
+                component.componentName === 'Terms of Use' &&
+                <TermsOfUse appId={component.appId} />
+              }
+
             </div>
 
             {/* Projects table (small breakpoint and up) */}
@@ -595,6 +626,16 @@ const DashboardNew = ({ getProfile }) => {
               {
                 component.componentName === 'Application' &&
                 <Application appId={component.appId} />
+              }
+
+              {
+                component.componentName === 'Privacy' &&
+                <PrivacyPolicy appId={component.appId} />
+              }
+
+              {
+                component.componentName === 'Terms of Use' &&
+                <TermsOfUse appId={component.appId} />
               }
             </div>
           </main>

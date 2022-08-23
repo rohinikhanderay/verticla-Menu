@@ -28,6 +28,12 @@ const ComponentReducer = (state = initialState, action) => {
         case 'Application':
             return {...state, componentName: 'Application', appId: action.appId}
 
+        case 'Privacy':
+            return {...state, componentName: 'Privacy'}
+
+        case 'Terms of Use':
+            return {...state, componentName: 'Terms of Use'}
+
         case 'title':
             return {...state, title: action.title}
 
