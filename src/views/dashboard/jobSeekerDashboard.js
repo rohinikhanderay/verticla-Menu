@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import * as applicationActions from '../../store/application'
 import * as profileActions from '../../store/profile'
 import BetaSignage from '../../components/layouts/betaSignage'
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 // import { ArrowCircleRightIcon } from '@heroicons/react/outline';
 
 const JobSeekerDashboard = ({
@@ -50,8 +50,8 @@ const JobSeekerDashboard = ({
             </p>
             <div className="flex items-center mt-4">
               <div to="/applications" className="text-teal-700 cursor-pointer" onClick={() => {
-                dispatch({type: 'title', title: 'My Applications'})
-                dispatch({type: 'My Applications'})
+                dispatch({ type: 'title', title: 'My Applications' })
+                dispatch({ type: 'My Applications' })
               }}>
                 View all
               </div>
@@ -85,9 +85,13 @@ const JobSeekerDashboard = ({
             ) : (
               firstThreeApplications.map((app) => {
                 return (
-                  <Link
+                  <div
+                    onClick={() => {
+                      dispatch({ type: 'title', title: 'My Applications' })
+                      dispatch({ type: 'Application', appId: app._id })
+                    }}
                     to={`/applications/${app._id}`}
-                    className="flex flex-col justify-between w-full h-56 p-4 rounded-md shadow "
+                    className="flex flex-col justify-between w-full h-56 p-4 rounded-md shadow cursor-pointer"
                   >
                     <p className="font-bold tracking-wider text-teal-600">
                       {app.job?.organization ? app.job?.organization.name : ''}
@@ -107,7 +111,7 @@ const JobSeekerDashboard = ({
                         Submitted
                       </p>
                     </div>
-                  </Link>
+                  </div>
                 )
               })
             )}
@@ -143,10 +147,10 @@ const JobSeekerDashboard = ({
         {/* Action Items */}
         <div className="grid gap-4 mt-8 text-white grid-cols-2 sm:grid-cols-1">
           <div
-          onClick={() => {
-            dispatch({type: 'title', title: 'Jobs & Internships'})
-            dispatch({type: 'Job Search'})
-          }}
+            onClick={() => {
+              dispatch({ type: 'title', title: 'Jobs & Internships' })
+              dispatch({ type: 'Job Search' })
+            }}
             className="relative h-48 p-6 overflow-hidden bg-red-400 rounded-md shadow-md cursor-pointer"
           >
             <div className="flex flex-col content-between">
@@ -191,8 +195,8 @@ const JobSeekerDashboard = ({
           </div>
           <div
             onClick={() => {
-              dispatch({type: 'title', title: 'My Applications'})
-              dispatch({type: 'My Applications'})
+              dispatch({ type: 'title', title: 'My Applications' })
+              dispatch({ type: 'My Applications' })
             }}
             to="/applications"
             className="relative h-48 p-6 overflow-hidden bg-yellow-400 rounded-md shadow-md cursor-pointer"
@@ -239,8 +243,8 @@ const JobSeekerDashboard = ({
           </div>
           <div
             onClick={() => {
-              dispatch({type: 'title', title: 'My Profile'})
-              dispatch({type: 'Profile'})
+              dispatch({ type: 'title', title: 'My Profile' })
+              dispatch({ type: 'Profile' })
             }}
             to={`/profiles/${profile.profile._id}`}
             className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md cursor-pointer"
@@ -287,8 +291,8 @@ const JobSeekerDashboard = ({
           </div>
           <div
             onClick={() => {
-              dispatch({type: 'title', title: 'Skills & Certifications'})
-              dispatch({type: 'Career Development'})
+              dispatch({ type: 'title', title: 'Skills & Certifications' })
+              dispatch({ type: 'Career Development' })
             }}
             to={`/skill/${profile.profile._id}`}
             className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md cursor-pointer"
@@ -336,8 +340,8 @@ const JobSeekerDashboard = ({
           </div>{' '}
           <div
             onClick={() => {
-              dispatch({type: 'title', title: 'Blogs'})
-              dispatch({type: 'Blogs'})
+              dispatch({ type: 'title', title: 'Blogs' })
+              dispatch({ type: 'Blogs' })
             }}
             to={`/blogs`}
             className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md cursor-pointer"

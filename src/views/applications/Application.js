@@ -8,6 +8,7 @@ import { Redirect } from 'react-router-dom'
 import Spinner from '../../components/spinner'
 import { HomeIcon, PaperClipIcon } from '@heroicons/react/solid'
 import parse from 'html-react-parser'
+import {useDispatch} from 'react-redux'
 
 const Application = ({
   match,
@@ -16,11 +17,13 @@ const Application = ({
   application,
   profile,
   getIndividualApplication,
+  appId
 }) => {
+  const dispatch = useDispatch()
   useEffect(() => {
     getProfile()
-    getIndividualApplication(match.params.id, history)
-  }, [getProfile, getIndividualApplication, match.params.id, history])
+    getIndividualApplication(appId, history)
+  }, [getProfile, getIndividualApplication, appId, history])
   useEffect(() => {
     getProfile()
   }, [])
@@ -31,7 +34,7 @@ const Application = ({
   if (
     profile.profile?._id !== application?.selectedApplication.profile._id &&
     profile.profile?.organization._id !==
-      application.selectedApplication?.job.organization
+    application.selectedApplication?.job.organization
   ) {
     return <Redirect to="/dashboard" />
   }
@@ -77,7 +80,7 @@ const Application = ({
   // }
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="relative z-0 min-h-screen bg-gray-100">
         <div className="mt-2 bg-white">
           <ol className="flex items-center px-8 py-4 mx-auto space-x-4 border-t max-w-7xl">
@@ -259,12 +262,16 @@ const Application = ({
                     </dl>
                   </div>
                   <div>
-                    <Link
+                    <div
+                      onClick={() => {
+                        dispatch({ type: 'title', title: 'My Profile' })
+                        dispatch({ type: 'Profile' })
+                      }}
                       to={`/profiles/${application.selectedApplication?.profile._id}`}
-                      className="block px-4 py-4 text-sm font-medium text-center text-gray-500 bg-gray-50 hover:text-gray-700 sm:rounded-b-lg"
+                      className="block px-4 py-4 text-sm font-medium text-center text-gray-500 bg-gray-50 hover:text-gray-700 sm:rounded-b-lg cursor-pointer"
                     >
                       View full profile
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </section>

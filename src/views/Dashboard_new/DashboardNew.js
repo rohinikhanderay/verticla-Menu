@@ -23,6 +23,7 @@ import Blogs from '../blogs/index'
 // import Applica÷
 import Jobs from '../jobs/Jobs';
 import Skill from '../profile/Skill';
+import Application from '../applications/Application';
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
@@ -122,7 +123,10 @@ const DashboardNew = ({ getProfile }) => {
 
 
     return (
-      <div className='flex items-center'>
+      <div className='flex items-center cursor-pointer' onClick={() => {
+        dispatch({ type: 'title', title: 'My Profile' })
+        dispatch({ type: 'Profile' })
+      }}>
         <div className="w-7 h-7 bg-blue-100 rounded-full">
           {data?.profileImg[0] ? (
             <div
@@ -264,7 +268,7 @@ const DashboardNew = ({ getProfile }) => {
 
 
                   </div>
-                  <div className="flex-1 h-0 overflow-y-auto">
+                  <div className="flex flex-col justify-between flex-1 h-0 overflow-y-auto">
                     <nav className="mt-5">
                       <div className="space-y-1">
                         {navigation.map((item) => (
@@ -286,7 +290,7 @@ const DashboardNew = ({ getProfile }) => {
                           >
 
                             <div className='flex' >
-                              <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
+                              <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                               <div className='flex px-2 py-3 text-bg_gray666 text-13px'>
                                 {
                                   component.componentName === item.name ? <img src={item.iconFilled}
@@ -313,9 +317,20 @@ const DashboardNew = ({ getProfile }) => {
                         ))}
                       </div>
                     </nav>
+
+                    <div>
+                      <hr />
+                      <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
+                        <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer'>Privacy Policy</label>
+                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer'>Terms and Conditions</label>
+                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer'>&copy;2022 Nuleep</label>
+                      </div>
+
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
+
 
             </div>
           </Dialog>
@@ -331,11 +346,11 @@ const DashboardNew = ({ getProfile }) => {
               />
             </div> */}
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="h-0 flex-1 flex flex-col overflow-y-auto">
+          <div className="h-0 flex-1 flex flex-col">
             {/* User account dropdown */}
             <Menu as="div" className="py-2 relative flex text-left">
               <div className='w-full'>
-                <Menu.Button className="mx-2 group w-full bg-gray-100 rounded-md px-3.5 py-4 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500">
+                <Menu.Button className="group w-full bg-gray-100 rounded-md px-3.5 py-4 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500">
                   <span className="flex w-full justify-between items-center">
                     <span className="flex min-w-0 items-center justify-between">
                       <img
@@ -413,7 +428,7 @@ const DashboardNew = ({ getProfile }) => {
                   >
                     <div className='flex'>
                       {/* w-1 bg-black */}
-                      <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
+                      <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                       <div className='flex px-2 py-4 text-bg_gray666 text-13px'>
                         {
                           component.componentName === item.name ? <img src={item.iconFilled}
@@ -439,6 +454,17 @@ const DashboardNew = ({ getProfile }) => {
               </div>
 
             </nav>
+
+          </div>
+
+          <div>
+            <hr />
+            <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
+              <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer'>Privacy Policy</label>
+              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer'>Terms and Conditions</label>
+              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer'>&copy;2022 Nuleep</label>
+            </div>
+
           </div>
         </div>
         {/* Main column */}
@@ -525,8 +551,12 @@ const DashboardNew = ({ getProfile }) => {
                 <Profile profile_Id={state.profile.profile._id} />
               }
               {
-                component.componentName === 'Blogs' && 
-                  <Blogs />
+                component.componentName === 'Blogs' &&
+                <Blogs />
+              }
+              {
+                component.componentName === 'Application' &&
+                <Application profile_Id={state.profile.profile._id} />
               }
 
             </div>
@@ -558,8 +588,13 @@ const DashboardNew = ({ getProfile }) => {
                 <Profile profile_Id={state.profile.profile._id} />
               }
               {
-                component.componentName === 'Blogs' && 
-                  <Blogs />
+                component.componentName === 'Blogs' &&
+                <Blogs />
+              }
+
+              {
+                component.componentName === 'Application' &&
+                <Application appId={component.appId} />
               }
             </div>
           </main>

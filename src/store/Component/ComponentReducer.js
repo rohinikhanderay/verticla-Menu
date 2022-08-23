@@ -1,6 +1,7 @@
 const initialState = {
     componentName: '',
-    title: ''
+    title: '',
+    appId: ''
 }
 
 const ComponentReducer = (state = initialState, action) => {
@@ -23,6 +24,9 @@ const ComponentReducer = (state = initialState, action) => {
         
         case 'Blogs':
             return {...state, componentName: 'Blogs'}
+
+        case 'Application':
+            return {...state, componentName: 'Application', appId: action.appId}
 
         case 'title':
             return {...state, title: action.title}
