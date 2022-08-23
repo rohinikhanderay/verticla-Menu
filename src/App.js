@@ -233,11 +233,13 @@ function App() {
               exact
             />
             <Route path="/about" component={withTracker(About)} exact />
+
             <Route
               path="/skill/:id"
               component={withTracker(RequireAuth(Skill))}
               exact
             />
+            
             <Route path="/" component={withTracker(Home)} exact />
             <Route
               path="/candidates"

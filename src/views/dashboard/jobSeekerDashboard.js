@@ -49,9 +49,12 @@ const JobSeekerDashboard = ({
               View your Applications
             </p>
             <div className="flex items-center mt-4">
-              <Link to="/applications" className="text-teal-700 ">
+              <div to="/applications" className="text-teal-700 cursor-pointer" onClick={() => {
+                dispatch({type: 'title', title: 'My Applications'})
+                dispatch({type: 'My Applications'})
+              }}>
                 View all
-              </Link>
+              </div>
               <svg
                 className="w-4 h-4 ml-2 text-teal-700"
                 fill="none"
@@ -141,11 +144,10 @@ const JobSeekerDashboard = ({
         <div className="grid gap-4 mt-8 text-white grid-cols-2 sm:grid-cols-1">
           <div
           onClick={() => {
-            console.log("on click is getting executed")
-            updateSublink('Job Search')
+            dispatch({type: 'title', title: 'Jobs & Internships'})
             dispatch({type: 'Job Search'})
           }}
-            className="relative h-48 p-6 overflow-hidden bg-red-400 rounded-md shadow-md"
+            className="relative h-48 p-6 overflow-hidden bg-red-400 rounded-md shadow-md cursor-pointer"
           >
             <div className="flex flex-col content-between">
               <p className="w-48 text-3xl font-bold font-baskerville">
@@ -154,7 +156,7 @@ const JobSeekerDashboard = ({
               <div className="flex items-center mt-4">
                 <p className="">All Jobs</p>
                 <svg
-                  className="w-4 h-4 ml-2 "
+                  className="w-4 h-4 ml-2"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -187,9 +189,13 @@ const JobSeekerDashboard = ({
               />
             </svg>
           </div>
-          <Link
+          <div
+            onClick={() => {
+              dispatch({type: 'title', title: 'My Applications'})
+              dispatch({type: 'My Applications'})
+            }}
             to="/applications"
-            className="relative h-48 p-6 overflow-hidden bg-yellow-400 rounded-md shadow-md"
+            className="relative h-48 p-6 overflow-hidden bg-yellow-400 rounded-md shadow-md cursor-pointer"
           >
             <div className="flex flex-col content-between">
               <p className="w-48 text-3xl font-bold font-baskerville">
@@ -230,10 +236,14 @@ const JobSeekerDashboard = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>
-          <Link
+          </div>
+          <div
+            onClick={() => {
+              dispatch({type: 'title', title: 'My Profile'})
+              dispatch({type: 'Profile'})
+            }}
             to={`/profiles/${profile.profile._id}`}
-            className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md"
+            className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md cursor-pointer"
           >
             <div className="flex flex-col content-between">
               <p className="w-48 text-3xl font-bold font-baskerville">
@@ -274,10 +284,14 @@ const JobSeekerDashboard = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>
-          <Link
+          </div>
+          <div
+            onClick={() => {
+              dispatch({type: 'title', title: 'Skills & Certifications'})
+              dispatch({type: 'Career Development'})
+            }}
             to={`/skill/${profile.profile._id}`}
-            className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md"
+            className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md cursor-pointer"
           >
             <div className="flex flex-col content-between">
               <p className="w-48 text-3xl font-bold font-baskerville">
@@ -319,10 +333,14 @@ const JobSeekerDashboard = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>{' '}
-          <Link
+          </div>{' '}
+          <div
+            onClick={() => {
+              dispatch({type: 'title', title: 'Blogs'})
+              dispatch({type: 'Blogs'})
+            }}
             to={`/blogs`}
-            className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md"
+            className="relative h-48 p-6 overflow-hidden bg-teal-300 rounded-md shadow-md cursor-pointer"
           >
             <div className="flex flex-col content-between">
               <p className="w-48 text-3xl font-bold font-baskerville">
@@ -364,7 +382,7 @@ const JobSeekerDashboard = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </Link>{' '}
+          </div>{' '}
         </div>
       </div>
       {/* / Action Items */}

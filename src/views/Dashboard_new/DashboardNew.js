@@ -17,14 +17,19 @@ import recruiterDashboard from '../dashboard/recruiterDashboard';
 import JobSeekerDashboard from '../dashboard/jobSeekerDashboard';
 import Dashboard from '../dashboard/DashboardContainer'
 import RecruiterDashboard from '../dashboard/recruiterDashboard';
+import Applications from '../applications/ApplicationsContainer'
+import Profile from '../NewProfile/profile';
+import Blogs from '../blogs/index'
+// import Applica÷
 import Jobs from '../jobs/Jobs';
 import Skill from '../profile/Skill';
 
+// { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeFilled },
   { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
   { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
-  { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
+
   { name: 'Log out', href: '#', icon: LogoutIcon, current: false, iconFilled: LogoutIcon }
 ]
 
@@ -83,6 +88,8 @@ const DashboardNew = ({ getProfile }) => {
   const state = useSelector(state => state)
   const component = useSelector(state => state.component)
 
+  console.log(component)
+
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(navigation[0])
   const [subLinks, setSubLinks] = useState()
@@ -96,6 +103,7 @@ const DashboardNew = ({ getProfile }) => {
 
 
   useEffect(() => {
+    dispatch({ type: 'title', title: 'Home' })
     dispatch({ type: 'Home' })
   }, [])
 
@@ -269,7 +277,7 @@ const DashboardNew = ({ getProfile }) => {
                             key={item.name}
                             href={item.href}
                             className={classNames(
-                              selectedItem.name === item.name
+                              component.componentName === item.name
                                 ? 'bg-gray-100 text-gray-900'
                                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                               'group flex items-center leading-5 font-semibold rounded-md text-xs'
@@ -281,7 +289,7 @@ const DashboardNew = ({ getProfile }) => {
                               <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                               <div className='flex px-2 py-3 text-bg_gray666 text-13px'>
                                 {
-                                  selectedItem.name === item.name ? <img src={item.iconFilled}
+                                  component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
                                       item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                                       'mr-3 flex-shrink-0 h-5 w-5'
@@ -381,12 +389,24 @@ const DashboardNew = ({ getProfile }) => {
                   <a
                     onClick={() => {
                       dispatch({ type: item.name })
+                      switch (item.name) {
+                        case 'Home':
+                          dispatch({ type: 'title', title: 'Home' })
+                          break;
+                        case 'Job Search':
+                          dispatch({ type: 'title', title: 'Jobs & Internships' })
+                          break;
+                        case 'Career Development':
+                          dispatch({ type: 'title', title: 'Skills & Certifications' })
+                          break;
+                      }
+
                       onSelectItem(item)
                     }}
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      selectedItem.name === item.name ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                      component.componentName === item.name ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                       'group flex items-center text-sm font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
@@ -396,7 +416,7 @@ const DashboardNew = ({ getProfile }) => {
                       <div className={classNames(item.current ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
                       <div className='flex px-2 py-4 text-bg_gray666 text-13px'>
                         {
-                          selectedItem.name === item.name ? <img src={item.iconFilled}
+                          component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(
                               item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                               'mr-3 flex-shrink-0 h-4 w-4 ml-2'
@@ -470,7 +490,7 @@ const DashboardNew = ({ getProfile }) => {
             {/* Page title & actions */}
             <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
               <div className="flex-1 min-w-0">
-                <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{selectedItem.name}</h1>
+                <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{component.title}</h1>
               </div>
             </div>
             {/* Pinned projects */}
@@ -490,6 +510,25 @@ const DashboardNew = ({ getProfile }) => {
                 <Jobs />
               }
 
+              {
+                component.componentName === 'Career Development' &&
+                <Skill profileId={state.profile.profile._id} />
+              }
+
+              {
+                component.componentName === 'My Applications' &&
+                <Applications />
+              }
+
+              {
+                component.componentName === 'Profile' &&
+                <Profile profile_Id={state.profile.profile._id} />
+              }
+              {
+                component.componentName === 'Blogs' && 
+                  <Blogs />
+              }
+
             </div>
 
             {/* Projects table (small breakpoint and up) */}
@@ -506,10 +545,22 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Job Search' &&
                 <Jobs />
               }
-              {/* {
-                selectedItem.name === 'Career Development' &&
-                  <Skill />
-              } */}
+              {
+                component.componentName === 'Career Development' &&
+                <Skill profileId={state.profile.profile._id} />
+              }
+              {
+                component.componentName === 'My Applications' &&
+                <Applications />
+              }
+              {
+                component.componentName === 'Profile' &&
+                <Profile profile_Id={state.profile.profile._id} />
+              }
+              {
+                component.componentName === 'Blogs' && 
+                  <Blogs />
+              }
             </div>
           </main>
         </div>

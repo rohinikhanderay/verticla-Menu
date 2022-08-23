@@ -238,7 +238,7 @@ const Jobs = ({ jobs, profile }) => {
       {/* <Navbar /> */}
       <div className="container m-auto px-5">
         <div className="mb-3 mt-5 w-11/12 m-auto xs:mb-14">
-          <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl">
+          <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl hidden">
             <svg
               viewBox="0 0 32 32"
               className="inline mr-3"

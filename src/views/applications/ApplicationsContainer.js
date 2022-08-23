@@ -17,7 +17,7 @@ const Applications = ({ getProfile, profile, history }) => {
 
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             {profile.profile?.type === 'jobSeeker' && (
                 <JobSeekerApplicationDashboard />
             )}

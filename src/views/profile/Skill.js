@@ -14,7 +14,8 @@ import {
   recommandedCourses,
 } from "../../store/profile/index";
 
-const Skill = ({ match }) => {
+const Skill = ({ match, profileId }) => {
+
   var settings = {
     dots: false,
     infinite: false,
@@ -68,7 +69,8 @@ const Skill = ({ match }) => {
   }, [trendingPageSize]);
   useEffect(() => {
     setSerchDataDisplay(false);
-    dispatch(viewProfile(match.params.id))
+    // dispatch(viewProfile(match.params.id))
+    dispatch(viewProfile(profileId))
       .then((res) => {
         setSkillArr(res.skills);
       })
@@ -140,7 +142,7 @@ const Skill = ({ match }) => {
           savedCourses: finalObj,
         })
       );
-      await dispatch(viewProfile(match.params.id));
+      await dispatch(viewProfile(profileId));
   }
   const saveCourse = async (e, data) => {
     let courseData = [...profileData?.selectedProfile?.savedCourses];
@@ -163,7 +165,7 @@ const Skill = ({ match }) => {
           savedCourses: courseData,
         })
       );
-      await dispatch(viewProfile(match.params.id));
+      await dispatch(viewProfile(profileId));
     }
   };
   const recentlyViews = async (data) => {
@@ -204,7 +206,7 @@ const Skill = ({ match }) => {
         recentlyViwedCourses: courseData,
       })
     );
-    await dispatch(viewProfile(match.params.id));
+    await dispatch(viewProfile(profileId));
   };
 
   const redirectCourse = (url, data) => {
@@ -214,12 +216,12 @@ const Skill = ({ match }) => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="p-10 sm:p-5">
         <div className="container m-auto">
           <div className="mb-24 mt-5 w-11/12 m-auto xs:mb-14">
-            <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl">
+            <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl hidden">
               <svg
                 viewBox="0 0 32 32"
                 className="inline mr-3"
@@ -996,7 +998,7 @@ const Skill = ({ match }) => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

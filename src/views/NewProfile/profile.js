@@ -13,7 +13,8 @@ import {
 import { Skills } from './Skills';
 
 const profileId = '';
-const Profile = ({ match }) => {
+const Profile = ({ match, profile_Id}) => {
+  console.log(profile_Id)
   const [publicProfile, setPublicProfile] = useState(false);
   const [profileId, setProfileId] = useState('');
   const [options, setOptions] = useState();
@@ -56,16 +57,16 @@ const Profile = ({ match }) => {
   }, [profileData, setOptions, setPublicProfile])
 
   useEffect(() => {
-    if(!profileId || profileId !== match.params.id){
-      setProfileId(match.params.id);
-      dispatch(viewProfile(match.params.id));
+    if(!profileId || profileId !== profile_Id){
+      setProfileId(profile_Id);
+      dispatch(viewProfile(profile_Id));
     }
-  }, [match])
+  }, [profile_Id])
 
   return (
     <>
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         {!publicProfile && (
           <div className="xs:py-4 md:p-8 flex flex-1 gap-2 flex-col w-full font-roboto">
               <div className="flex justify-end xs:px-4">
@@ -80,7 +81,7 @@ const Profile = ({ match }) => {
         </div>)}
         {publicProfile && (
           <PreviewPublic selectedProfile={profileData?.selectedProfile} roletype={profileData?.profile?.type} resetPublicProfile={() => setPublicProfile(false)}/>)}
-      <Footer />
+      {/* <Footer /> */}
     </div>
     </>
   );

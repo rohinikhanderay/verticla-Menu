@@ -97,13 +97,13 @@ const JobSeekerApplicationContainer = ({
   return (
     <div>
       <div className="mb-48 font-inter">
-        <header>
+        {/* <header>
           <div className="h-32 px-4 pt-12 bg-teal-600 sm:px-6 lg:px-8">
             <h1 className="max-w-5xl mx-auto text-3xl font-bold leading-tight text-white">
               My Applications
             </h1>
           </div>
-        </header>
+        </header> */}
         <main className="max-w-5xl px-4 mx-auto md:px-0">
           <div className="">
             <div className="mt-10">
