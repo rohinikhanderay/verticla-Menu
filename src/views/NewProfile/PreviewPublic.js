@@ -10,8 +10,11 @@ import OpenIcon from '../../assets/images/icons/open.svg';
 import Pro_img from '../../assets/images/de_images.png'
 import Moment from 'moment';
 import SkillsIcon from '../../assets/images/icons/Skills.svg';
+import {useDispatch} from 'react-redux'
 
 export const PreviewPublic = ({ match, selectedProfile, resetPublicProfile, roletype }) => {
+    const dispatch = useDispatch()
+
     const openLink = (url) => {
         const openUrl = (!url.includes('http://') || !url.includes('https://')) ? `https://${url}` : url
         window.open(openUrl, "_blank");
@@ -19,7 +22,10 @@ export const PreviewPublic = ({ match, selectedProfile, resetPublicProfile, role
     return (
         <div className="xs:py-4 md:p-8 flex flex-1 gap-2 flex-col w-full font-roboto">
             {roletype === 'jobSeeker' && <div className="flex justify-start">
-                <button type="button" className="text-teal-700 flex items-center justify-center border-2 rounded-full border-teal-700 flex pl-2 pr-3 py-1" onClick={() => resetPublicProfile(true)}><img src={BackArrowIcon} alt="back-arrow" className="pr-2 w-22 h-22" /> Back to Profile edit</button>
+                <button type="button" className="text-teal-700 flex items-center justify-center border-2 rounded-full border-teal-700 flex pl-2 pr-3 py-1" onClick={() => { 
+                    resetPublicProfile(true)
+                    dispatch({type: 'preview_public', publicProfile: false})
+                }}><img src={BackArrowIcon} alt="back-arrow" className="pr-2 w-22 h-22" /> Back to Profile edit</button>
             </div>}
             <div className="flex flex-1 md:gap-8 flex-col w-full">
                 <div className="flex flex-1 bg-white shrink-0 border md:rounded-xl md:shadow-lg font-roboto">

@@ -119,7 +119,6 @@ const RecruiterDashboard = ({
   ]
   return (
     <div>
-      <Navbar />
 
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <main className="pb-8 pb-48 mt-8">

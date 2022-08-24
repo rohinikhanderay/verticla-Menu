@@ -3,7 +3,8 @@ const initialState = {
     title: '',
     appId: '',
     jobId: '',
-    blogId: ''
+    blogId: '',
+    publicProfile: false
 }
 
 const ComponentReducer = (state = initialState, action) => {
@@ -47,6 +48,9 @@ const ComponentReducer = (state = initialState, action) => {
 
         case 'title':
             return {...state, title: action.title}
+
+        case 'preview_public':
+            return {...state, publicProfile: action.publicProfile}
 
     }
 

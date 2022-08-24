@@ -34,21 +34,12 @@ import BlogDetails from '../blogs/blog';
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeFilled },
-  { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
-  { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
-
-  { name: 'Log out', href: '#', icon: LogoutIcon, current: false, iconFilled: LogoutIcon }
-]
-
-const navigationJobPartner = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeFilled },
   { name: 'Post a Job', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
   { name: 'My Applicants', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
   { name: 'Search Candidates', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
   { name: 'Company Dashboard', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
   { name: 'Log out', href: '#', icon: LogoutIcon, current: false, iconFilled: LogoutIcon }
 ]
-
 
 
 
@@ -98,11 +89,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const DashboardNew = ({ getProfile }) => {
+const JobPartnerDashboard = ({ getProfile }) => {
 
   const dispatch = useDispatch()
   const state = useSelector(state => state)
   const component = useSelector(state => state.component)
+
+  console.log(state)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(navigation[0])
@@ -603,8 +596,8 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
-                state?.profile?.profile?.userRef.role === "jobSeeker" &&
-                <JobSeekerDashboard profile={state.profile} updateSublink={updateSublink} />
+                state?.profile?.profile?.userRef.role === "recruiter" &&
+                <RecruiterDashboard profile={state.profile} updateSublink={updateSublink} />
               }
               {
                 component.componentName === 'Job Search' &&
@@ -666,8 +659,8 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
-                state?.profile?.profile?.userRef.role === "jobSeeker" &&
-                <JobSeekerDashboard profile={state.profile} />
+                state?.profile?.profile?.userRef.role === "recruiter" &&
+                <RecruiterDashboard profile={state.profile} />
 
               }
               {
@@ -736,4 +729,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default withRouter(connect(mapStateToProps, actions)(DashboardNew));
+export default withRouter(connect(mapStateToProps, actions)(JobPartnerDashboard));
