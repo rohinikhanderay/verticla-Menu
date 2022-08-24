@@ -20,12 +20,15 @@ import RecruiterDashboard from '../dashboard/recruiterDashboard';
 import Applications from '../applications/ApplicationsContainer'
 import Profile from '../NewProfile/profile';
 import Blogs from '../blogs/index'
+import NewApplication from '../applications/NewApplication'
 // import Applica÷
 import Jobs from '../jobs/Jobs';
 import Skill from '../profile/Skill';
 import Application from '../applications/Application';
 import PrivacyPolicy from '../landingPages/PrivacyPolicy';
 import TermsOfUse from '../landingPages/TermsOfUse';
+import Job from '../jobs/Job';
+import BlogDetails from '../blogs/blog';
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
@@ -90,8 +93,6 @@ const DashboardNew = ({ getProfile }) => {
   const dispatch = useDispatch()
   const state = useSelector(state => state)
   const component = useSelector(state => state.component)
-
-  console.log(component)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(navigation[0])
@@ -536,9 +537,24 @@ const DashboardNew = ({ getProfile }) => {
           <main className="flex-1">
             {/* Page title & actions */}
             <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 flex justify-between">
                 <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{component.title}</h1>
+
+                {
+                  component.componentName === 'Profile' && <div className='flex flex-row'>
+                    <div className='pl-7 pt-1 pb-1 pr-7 border-1px rounded-full border-black'>
+                      <label className='text-sm font-normal text-black cursor-pointer'>Print Resume</label>
+                    </div>
+                    <div className='ml-2 pl-7 pt-1 pb-1 pr-7 border-1px rounded-full bg-black'>
+                      <label className='text-sm font-normal decoration-black cursor-pointer text-bg_skyblue'>Preview Public</label>
+                    </div>
+
+                  </div>
+                }
+
               </div>
+
+
             </div>
             {/* Pinned projects */}
 
@@ -589,6 +605,20 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Terms of Use' &&
                 <TermsOfUse appId={component.appId} />
               }
+              {
+                component.componentName === 'JobDesc' &&
+                <Job jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'New Application' &&
+                <NewApplication jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'Blog Details' &&
+                <BlogDetails blogId={component.blogId} />
+              }
 
             </div>
 
@@ -630,12 +660,26 @@ const DashboardNew = ({ getProfile }) => {
 
               {
                 component.componentName === 'Privacy' &&
-                <PrivacyPolicy appId={component.appId} />
+                <PrivacyPolicy />
               }
 
               {
                 component.componentName === 'Terms of Use' &&
-                <TermsOfUse appId={component.appId} />
+                <TermsOfUse />
+              }
+
+              {
+                component.componentName === 'JobDesc' &&
+                <Job jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'New Application' &&
+                <NewApplication jobId={component.jobId} />
+              }
+              {
+                component.componentName === 'Blog Details' &&
+                <BlogDetails blogId={component.blogId} />
               }
             </div>
           </main>

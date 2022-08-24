@@ -1,7 +1,9 @@
 const initialState = {
     componentName: '',
     title: '',
-    appId: ''
+    appId: '',
+    jobId: '',
+    blogId: ''
 }
 
 const ComponentReducer = (state = initialState, action) => {
@@ -33,6 +35,15 @@ const ComponentReducer = (state = initialState, action) => {
 
         case 'Terms of Use':
             return {...state, componentName: 'Terms of Use'}
+        
+        case 'New Application':
+            return {...state, componentName: 'New Application', jobId: action.jobId}
+        
+        case 'JobDesc':
+            return {...state, componentName: 'JobDesc', jobId: action.jobId}
+        
+        case 'Blog Details':
+            return {...state, componentName: 'Blog Details', blogId: action.blogId}
 
         case 'title':
             return {...state, title: action.title}

@@ -46,7 +46,8 @@ const Jobs = ({ jobs, profile }) => {
   const dispatch = useDispatch()
   const redMoreBtn = (job) => {
     if (job?._id) {
-      history.push(`/jobs/${job?._id}`)
+      // history.push(`/jobs/${job?._id}`)
+      dispatch({type: 'JobDesc', jobId: job?._id})
     } else {
       window.open(
         job?.url,
@@ -663,7 +664,6 @@ const Jobs = ({ jobs, profile }) => {
                         </div>
                         <div
                           className="absolute top-2/4 right-3"
-                          className="absolute top-2/4 right-3"
                         >
                           <svg
                             style={{ cursor: 'pointer' }}
@@ -734,6 +734,7 @@ const Jobs = ({ jobs, profile }) => {
                 }}
                 className="btn px-10 sm:px-16 py-3 sm:pt-3 sm:pb-3 xs:pl-0 xs:pr-0 bg-teal-600 text-white rounded-xl text-base	 mt-5	font-medium sm:mr-0 sm:w-full sm:mb-5 md:w-auto md:mb-0"
                 onClick={() => {
+
                   history.push(`/profiles/${profile?.profile?._id}`)
                 }}
               />

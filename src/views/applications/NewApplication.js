@@ -22,6 +22,7 @@ const NewApplication = ({
   viewJob,
   jobs,
   createApplication,
+  jobId
 }) => {
   const [form, setForm] = useState({
     coverLetter: '',
@@ -31,8 +32,8 @@ const NewApplication = ({
   if (!jobs.selectedJob) <Spinner />
 
   useEffect(() => {
-    viewJob(match.params.id, history)
-  }, [viewJob, match, history])
+    viewJob(jobId, history)
+  }, [viewJob, jobId, history])
 
   const removeTag = (i) => {
     const tags = form.skills
@@ -55,7 +56,7 @@ const NewApplication = ({
 
   const onSubmit = (e) => {
     e.preventDefault()
-    createApplication(form, match.params.id, history)
+    createApplication(form, jobId, history)
   }
   const handleEditorChange = (content, editor) => {
     setForm({
@@ -65,7 +66,6 @@ const NewApplication = ({
   }
   return (
     <div>
-      <Navbar />
       <div className="max-w-5xl px-4 py-12 mx-auto mt-6 mb-64 border border-gray-200 rounded-lg md:px-32 font-inter">
         <p className="text-2xl text-center text-gray-700 font-baskerville ">
           Apply to {jobs.selectedJob?.positionTitle}
@@ -187,7 +187,7 @@ const NewApplication = ({
           </div>
 
           <div className="flex items-center justify-end mt-6">
-            <Link className="text-gray-300" to={`/jobs/${match.params.id}`}>
+            <Link className="text-gray-300" to={`/jobs/${jobId}`}>
               Back
             </Link>
             <button

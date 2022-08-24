@@ -24,7 +24,8 @@ module.exports = {
         border_gray:'#cccccc',
         disable_bg_color: '#E6E6E6',
         bg_white: '#FFFFFF',
-        bg_gray666: '#666666'
+        bg_gray666: '#666666',
+        bg_skyblue: '#10E9D4'
       },
 
       screens: {
@@ -65,6 +66,10 @@ module.exports = {
 
       fontSize: {
         '13px': '13px'
+      },
+
+      borderWidth: {
+        '1px': '1px'
       }
     },
   },

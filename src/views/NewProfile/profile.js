@@ -14,7 +14,6 @@ import { Skills } from './Skills';
 
 const profileId = '';
 const Profile = ({ match, profile_Id}) => {
-  console.log(profile_Id)
   const [publicProfile, setPublicProfile] = useState(false);
   const [profileId, setProfileId] = useState('');
   const [options, setOptions] = useState();
@@ -70,8 +69,9 @@ const Profile = ({ match, profile_Id}) => {
         {!publicProfile && (
           <div className="xs:py-4 md:p-8 flex flex-1 gap-2 flex-col w-full font-roboto">
               <div className="flex justify-end xs:px-4">
-              {/* <button type="button" className="text-teal-700 border-2 rounded-full  border-teal-700 w-42 pl-3 pr-3 py-1 mr-3" onClick={() => setPublicProfile(true)}> Resume</button> */}
-              <button type="button" className="text-white border-2 rounded-full bg-teal-600 hover:bg-teal-600 hover:text-white border-teal-600 w-42 pl-3 pr-3 py-1" onClick={() => setPublicProfile(true)}> Preview Public</button></div>
+              {/* <button type="button" className="text-teal-700 border-2 rounded-full  border-teal-700 w-42 pl-3 pr-3 py-1 mr-3" onClick={() => setPublicProfile(true)}> Resume</button>
+              <button type="button" className="text-white border-2 rounded-full bg-teal-600 hover:bg-teal-600 hover:text-white border-teal-600 w-42 pl-3 pr-3 py-1" onClick={() => setPublicProfile(true)}> Preview Public</button>  */}
+              </div>
               <div className="flex flex-1 md:gap-8 flex-col w-full">
               <ProfileInfo selectedProfile={profileData?.selectedProfile}/>
               <CareerJourney selectedProfile={profileData?.selectedProfile}/>
