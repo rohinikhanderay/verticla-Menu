@@ -215,9 +215,11 @@ const RecruiterDashboard = ({
                             {jobs.recruiterJobs?.length}
                           </span>{" "}
                           <span className="text-gray-600">Job(s) Posted</span> */}
-                          <Link className="text-gray-600" to={`company/jobs`}>
+                          <div className="text-gray-600" to={`company/jobs`} onClick={() => {
+                            dispatch({type: 'company_dashboard'})
+                          }}>
                             {jobs.recruiterJobs?.length} Job(s) Posted
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -372,12 +374,15 @@ const RecruiterDashboard = ({
                           </ul>
                         </div>
                         <div className="mt-6">
-                          <Link
+                          <div
+                            onClick={() => {
+                                dispatch({type: 'My Applications'})
+                            }}
                             to="/applications"
-                            className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                            className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 cursor-pointer"
                           >
                             View More
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

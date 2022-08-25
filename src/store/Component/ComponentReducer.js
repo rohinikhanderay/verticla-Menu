@@ -4,7 +4,8 @@ const initialState = {
     appId: '',
     jobId: '',
     blogId: '',
-    publicProfile: false
+    publicProfile: false,
+    profileId: ''
 }
 
 const ComponentReducer = (state = initialState, action) => {
@@ -54,6 +55,12 @@ const ComponentReducer = (state = initialState, action) => {
 
         case 'View Jobs':
             return { ...state, componentName: 'View Jobs', jobId: action.jobId }
+        
+        case 'Edit Job':
+            return {...state, componentName: 'Edit Job', jobId: action.jobId}
+
+        case 'My Profile':
+            return {...state, componentName: 'Profiles', profileId: action.profileId}
 
         case 'preview_public':
             return { ...state, publicProfile: action.publicProfile }

@@ -149,12 +149,16 @@ const Job = ({
                     {selectedJob.positionTitle}
                   </h1>
                   {profile?._id === selectedJob.recruiter?._id && (
-                    <Link
+                    <div
+                    onClick={() => {
+                      dispatch({type: 'title', title: 'Edit'})
+                      dispatch({type: 'Edit Job', jobId: jobId})
+                    }}
                       to={`/jobs/${jobId}/edit`}
                       className="inline-block px-4 py-2 mt-4 text-white bg-teal-600 rounded"
                     >
                       Edit Job
-                    </Link>
+                    </div>
                   )}
                 </div>
                 <div className="grid sm:block grid-cols-2 gap-2 mt-4 text-sm text-gray-500 md:mt-0 md:gap-4 md:w-1/2">

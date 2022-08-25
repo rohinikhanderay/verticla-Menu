@@ -46,7 +46,7 @@ const ViewJob = ({
                                 <ol className="flex items-center space-x-4">
                                     <li>
                                         <div>
-                                            <div
+                                            <Link
                                                 // onClick={() => {
                                                 //     dispatch({title: 'My Applications', title: 'My Applications'})
                                                 //     dispatch({type: 'Application', appId: jobId})
@@ -55,7 +55,7 @@ const ViewJob = ({
                                                 className="text-sm font-medium text-gray-500 hover:text-gray-700"
                                             >
                                                 Jobs
-                                            </div>
+                                            </Link>
                                         </div>
                                     </li>
                                     <li>

@@ -42,6 +42,7 @@ const EditJob = ({
   jobs,
   profile,
   history,
+  jobId,
 }) => {
   const [fielErr, setFileErr] = useState('')
   const [form, setForm] = useState(initialState)
@@ -56,7 +57,7 @@ const EditJob = ({
   // }
   useEffect(() => {
     getProfile()
-    viewJob(match.params.id, history)
+    viewJob(jobId, history)
     if (!jobs.loading) {
       const jobData = { ...initialState }
       for (const key in jobs.selectedJob) {
@@ -69,7 +70,7 @@ const EditJob = ({
       }
       setForm(jobData)
     }
-  }, [jobs.loading, viewJob, getProfile, history, match.params.id])
+  }, [jobs.loading, viewJob, getProfile, history, jobId])
 
   if (jobs.loading || !profile.profile) {
     return <Spinner />
@@ -149,11 +150,11 @@ const EditJob = ({
 
   const submit = (e) => {
     e.preventDefault()
-    editJob(form, match.params.id, history)
+    editJob(form, jobId, history)
   }
 
   const deleteJobPosting = (e) => {
-    deleteJob(match.params.id, history)
+    deleteJob(jobId, history)
   }
   const showFile = (e) => {
     if (e.target.files.length !== 0) {
@@ -177,7 +178,7 @@ const EditJob = ({
   }
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ToastContainer />
       <img
         className="object-cover object-center w-full h-48 border-t-2"
@@ -734,7 +735,7 @@ const EditJob = ({
                 </p>
                 <div className="flex justify-end">
                   <Link
-                    to={`/jobs/${match.params.id}`}
+                    to={`/jobs/${jobId}`}
                     className="px-4 py-2 font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm text-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                   >
                     Cancel

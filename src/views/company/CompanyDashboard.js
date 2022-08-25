@@ -59,12 +59,11 @@ const CompanyDashboard = ({
     if (type === 'apllication') {
       onTabClick(1)
     }
-    if (history.location.pathname.split('/')[2] === 'jobs') {
-      console.log("jobs")
+    if (type === 'jobs') {
       onTabClick(0)
     }
 
-    if (history.location.pathname.split('/')[2] === 'employees') {
+    if (type === 'employees') {
       onTabClick(2)
     }
 
@@ -355,8 +354,8 @@ const CompanyDashboard = ({
                         className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap "
                         onClick={() => {
                           // history.push(`/profiles/${app.profile?._id}`)
-                          dispatch({type: 'title', title: 'My Applications'})
-                          dispatch({type: 'My Applications'})
+                          dispatch({type: 'title', title: 'Profiles'})
+                          dispatch({type: 'My Profile', profileId: app.profile?._id})
                         }}
                       >
                         {app.profile?.firstName} {app.profile?.lastName}
