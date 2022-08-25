@@ -227,11 +227,9 @@ const RecruiterApplicationContainer = ({
     <div>
       <div className="py-10">
         <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold leading-tight text-gray-700">
-            Applications
-          </h1>
+          
           <div>
-            <div className="flex justify-between gap-6 mt-8">
+            <div className="flex justify-between gap-6">
               <div className="w-full p-4 border rounded">
                 <p>{application.recruiterApplications?.length}</p>
                 <p>Total Applicants</p>

@@ -21,10 +21,11 @@ const Company = ({
   match,
   viewOrganization,
   company: { selectedCompany, loading },
+  orgId
 }) => {
   useEffect(() => {
-    viewOrganization(match.params.id)
-  }, [viewOrganization, match.params.id])
+    viewOrganization(orgId)
+  }, [viewOrganization, orgId])
   const profileData = useSelector((state) => state.profile)
   if (loading) return <Spinner />
 
@@ -78,7 +79,6 @@ const Company = ({
 
   return (
     <div>
-      <Navbar />
 
       <div>
         <img
@@ -113,7 +113,7 @@ const Company = ({
 
             {profileData.profile?.organizationRole === 'admin' ? (
               <Link
-                to={`/company/${match.params.id}/edit`}
+                to={`/company/${orgId}/edit`}
                 className="inline-block px-4 py-2 mt-4 text-white bg-teal-600 rounded"
               >
                 Edit Company

@@ -210,7 +210,7 @@ const RecruiterDashboard = ({
                             Application(s)
                           </div>
                         </div>
-                        <div className="px-6 py-5 text-sm font-medium text-center grid-row-3">
+                        <div className="px-6 py-5 text-sm font-medium text-center grid-row-3 cursor-pointer">
                           {/* <span className="text-gray-900">
                             {jobs.recruiterJobs?.length}
                           </span>{" "}
@@ -267,9 +267,13 @@ const RecruiterDashboard = ({
                           </div>
                           <div className="mt-8">
                             <h3 className="text-lg font-medium">
-                              <Link
+                              <div
                                 to={action.href}
-                                className="focus:outline-none"
+                                className="focus:outline-none cursor-pointer"
+                                onClick={() => {
+                                  dispatch({title: action.name, type: 'title'})
+                                  dispatch({type: action.name, organizationId: profileData?.profile?.organization?._id})
+                                }}
                               >
                                 {/* Extend touch target to entire panel */}
                                 <span
@@ -277,7 +281,7 @@ const RecruiterDashboard = ({
                                   aria-hidden="true"
                                 />
                                 {action.name}
-                              </Link>
+                              </div>
                             </h3>
                             <p className="mt-2 text-sm text-gray-500">
                               {action.description}
@@ -376,6 +380,7 @@ const RecruiterDashboard = ({
                         <div className="mt-6">
                           <div
                             onClick={() => {
+                              dispatch({type: 'title', title: 'Applications'})
                                 dispatch({type: 'My Applications'})
                             }}
                             to="/applications"

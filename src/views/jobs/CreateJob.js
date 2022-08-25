@@ -194,7 +194,7 @@ const CreateJob = (props) => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ToastContainer />
       <img
         className="object-cover object-center w-full h-48 border-t-2"

@@ -5,7 +5,8 @@ const initialState = {
     jobId: '',
     blogId: '',
     publicProfile: false,
-    profileId: ''
+    profileId: '',
+    organizationId: ''
 }
 
 const ComponentReducer = (state = initialState, action) => {
@@ -27,6 +28,9 @@ const ComponentReducer = (state = initialState, action) => {
             return { ...state, componentName: 'Profile' }
 
         case 'Blogs':
+            return { ...state, componentName: 'Blogs' }
+
+        case 'Blog':
             return { ...state, componentName: 'Blogs' }
 
         case 'Application':
@@ -55,15 +59,31 @@ const ComponentReducer = (state = initialState, action) => {
 
         case 'View Jobs':
             return { ...state, componentName: 'View Jobs', jobId: action.jobId }
-        
+
         case 'Edit Job':
-            return {...state, componentName: 'Edit Job', jobId: action.jobId}
+            return { ...state, componentName: 'Edit Job', jobId: action.jobId }
 
         case 'My Profile':
-            return {...state, componentName: 'Profiles', profileId: action.profileId}
+            return { ...state, componentName: 'Profiles', profileId: action.profileId }
 
         case 'preview_public':
             return { ...state, publicProfile: action.publicProfile }
+
+        case 'Post a new Job':
+            return { ...state, componentName: 'Post-Job' }
+
+        case 'View Applications':
+            return { ...state, componentName: 'View Applications' }
+
+        case 'View Company Profile':
+            return { ...state, componentName: 'Company Profile', organizationId: action.organizationId }
+
+        case 'Nuleep Labs':
+            return { ...state, componentName: 'Nuleep Labs' }
+
+        case 'Billing Portal':
+            return { ...state, componentName: 'Billing Portal' }
+
 
     }
 

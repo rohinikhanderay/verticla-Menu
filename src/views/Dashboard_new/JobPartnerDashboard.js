@@ -33,6 +33,8 @@ import BlogDetails from '../blogs/blog';
 import CompanyDashboard from '../company/CompanyDashboard';
 import ViewJob from '../../views/jobs/ViewJob'
 import EditJob from '../jobs/EditJob';
+import CreateJob from '../jobs/CreateJob';
+import Company from '../company/Company';
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
@@ -666,9 +668,23 @@ const JobPartnerDashboard = ({ getProfile }) => {
 
               {
                 component.componentName === 'Profiles' &&
-                <Profile profileId={component.profileId} />
+                <Profile profile_Id={component.profileId} />
               }
 
+              {
+                component.componentName === 'Post-Job' &&
+                <CreateJob />
+              }
+
+              {
+                component.componentName === 'View Applications' &&
+                <Applications />
+              }
+              
+              {
+                component.componentName === 'Company Profile' &&
+                  <Company orgId={component.organizationId}/>
+              }
             </div>
 
             {/* Projects table (small breakpoint and up) */}
@@ -743,6 +759,21 @@ const JobPartnerDashboard = ({ getProfile }) => {
               {
                 component.componentName === 'Profiles' &&
                 <Profile profile_Id={component.profileId} />
+              }
+
+              {
+                component.componentName === 'Post-Job' &&
+                <CreateJob />
+              }
+
+              {
+                component.componentName === 'View Applications' &&
+                <Applications />
+              }
+
+              {
+                component.componentName === 'Company Profile' &&
+                <Company orgId={component.organizationId}/>
               }
 
             </div>
