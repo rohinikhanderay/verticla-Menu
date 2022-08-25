@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Navbar from '../../components/layouts/navbar';
 import * as jobActions from '../../store/job';
 import * as applicationActions from '../../store/application';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import {
     BriefcaseIcon,
@@ -23,11 +23,14 @@ const ViewJob = ({
     applications: { jobApplications },
     viewJob,
     getAllJobApplications,
+    jobId
 }) => {
+
+    const dispatch = useDispatch()
     useEffect(() => {
-        viewJob(match.params.id, history);
-        getAllJobApplications(match.params.id, history);
-    }, [viewJob, getAllJobApplications, history, match]);
+        viewJob(jobId, history);
+        getAllJobApplications(jobId, history);
+    }, [viewJob, getAllJobApplications, history, jobId]);
 
     if (loading && !selectedJob) {
         return <Spinner />;
@@ -35,7 +38,6 @@ const ViewJob = ({
 
     return (
         <div>
-            <Navbar />
             <div className="max-w-5xl px-2 mx-auto sm:px-4 lg:px-8 font-inter">
                 <header className="py-4">
                     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
@@ -44,12 +46,16 @@ const ViewJob = ({
                                 <ol className="flex items-center space-x-4">
                                     <li>
                                         <div>
-                                            <Link
+                                            <div
+                                                // onClick={() => {
+                                                //     dispatch({title: 'My Applications', title: 'My Applications'})
+                                                //     dispatch({type: 'Application', appId: jobId})
+                                                // }}
                                                 to="/applications"
                                                 className="text-sm font-medium text-gray-500 hover:text-gray-700"
                                             >
                                                 Jobs
-                                            </Link>
+                                            </div>
                                         </div>
                                     </li>
                                     <li>
@@ -112,8 +118,8 @@ const ViewJob = ({
                         </div>
                         <div className="flex mt-5 xl:mt-0 xl:ml-4">
                             <span className="hidden ml-0 md:ml-3 sm:block">
-                                <Link
-                                    to={`/jobs/${match.params.id}`}
+                                {/* <Link
+                                    to={`/jobs/${jobId}`}
                                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-teal-500"
                                 >
                                     <LinkIcon
@@ -121,7 +127,7 @@ const ViewJob = ({
                                         aria-hidden="true"
                                     />
                                     View
-                                </Link>
+                                </Link> */}
                             </span>
                         </div>
                     </div>
@@ -136,9 +142,13 @@ const ViewJob = ({
                         <ul className="mt-2 divide-y divide-gray-200">
                             {jobApplications.map((application) => (
                                 <li key={application._id}>
-                                    <Link
+                                    <div
+                                        onClick={() => {
+                                            dispatch({ type: 'title', title: 'My Applications' })
+                                            dispatch({ type: 'Application', appId: application._id })
+                                        }}
                                         to={`/applications/${application._id}`}
-                                        className="block group"
+                                        className="block group cursor-pointer"
                                     >
                                         <div className="flex items-center px-4 py-5 sm:py-6 sm:px-0">
                                             <div className="flex items-center flex-1 min-w-0">
@@ -214,7 +224,7 @@ const ViewJob = ({
                                                 />
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

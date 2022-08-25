@@ -30,6 +30,8 @@ import PrivacyPolicy from '../landingPages/PrivacyPolicy';
 import TermsOfUse from '../landingPages/TermsOfUse';
 import Job from '../jobs/Job';
 import BlogDetails from '../blogs/blog';
+import CompanyDashboard from '../company/CompanyDashboard';
+import ViewJob from '../../views/jobs/ViewJob'
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
@@ -600,8 +602,8 @@ const JobPartnerDashboard = ({ getProfile }) => {
                 <RecruiterDashboard profile={state.profile} updateSublink={updateSublink} />
               }
               {
-                component.componentName === 'Job Search' &&
-                <Jobs />
+                component.componentName === 'Company Dashboard' &&
+                <CompanyDashboard type={"apllication"} />
               }
 
               {
@@ -651,6 +653,11 @@ const JobPartnerDashboard = ({ getProfile }) => {
                 <BlogDetails blogId={component.blogId} />
               }
 
+              {
+                component.componentName === 'View Jobs' &&
+                <ViewJob jobId={component.jobId} />
+              }
+
             </div>
 
             {/* Projects table (small breakpoint and up) */}
@@ -664,8 +671,8 @@ const JobPartnerDashboard = ({ getProfile }) => {
 
               }
               {
-                component.componentName === 'Job Search' &&
-                <Jobs />
+                component.componentName === 'Company Dashboard' &&
+                <CompanyDashboard type={"apllication"} />
               }
               {
                 component.componentName === 'Career Development' &&
@@ -711,6 +718,10 @@ const JobPartnerDashboard = ({ getProfile }) => {
               {
                 component.componentName === 'Blog Details' &&
                 <BlogDetails blogId={component.blogId} />
+              }
+              {
+                component.componentName === 'View Jobs' &&
+                <ViewJob jobId={component.jobId} />
               }
             </div>
           </main>

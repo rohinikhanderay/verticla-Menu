@@ -199,13 +199,16 @@ const RecruiterDashboard = ({
                             Open Application(s)
                           </span> */}
 
-                          <Link
-                            className="text-gray-600"
-                            to={`company/apllication`}
+                          <div
+                            className="text-gray-600 cursor-pointer"
+                            // to={`company/apllication`}
+                            onClick={() => {
+                              dispatch({type: 'company_dashboard'})
+                            }}
                           >
                             {application.recruiterApplications?.length} Open
                             Application(s)
-                          </Link>
+                          </div>
                         </div>
                         <div className="px-6 py-5 text-sm font-medium text-center grid-row-3">
                           {/* <span className="text-gray-900">

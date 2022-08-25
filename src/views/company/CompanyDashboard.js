@@ -24,7 +24,7 @@ const CompanyDashboard = ({
   viewRecruiterOrganization,
   approveRole,
   getProfile,
-
+  type,
   profile,
 }) => {
   const [tab, setTab] = useState([
@@ -42,6 +42,7 @@ const CompanyDashboard = ({
   const [approveLoader, setApproveLoader] = useState()
   const [isShow, setIsShow] = useState(false)
   const [removeUser, setRemoveUSer] = useState('')
+  console.log(type)
 
   const dispatch = useDispatch()
   const onTabClick = (index) => {
@@ -55,10 +56,11 @@ const CompanyDashboard = ({
   }
 
   useEffect(() => {
-    if (history.location.pathname.split('/')[2] === 'apllication') {
+    if (type === 'apllication') {
       onTabClick(1)
     }
     if (history.location.pathname.split('/')[2] === 'jobs') {
+      console.log("jobs")
       onTabClick(0)
     }
 
@@ -66,13 +68,13 @@ const CompanyDashboard = ({
       onTabClick(2)
     }
 
-    if (
-      history.location.pathname.split('/').length == 2 ||
-      history.location.pathname.split('/')[2].length == 24
-    ) {
-      onTabClick(0)
-    }
-  }, [history.location.pathname])
+    // if (
+    //   history.location.pathname.split('/').length == 2 ||
+    //   history.location.pathname.split('/')[2].length == 24
+    // ) {
+    //   onTabClick(0)
+    // }
+  }, [])
   useEffect(() => {
     if (
       new URLSearchParams(search).get('success') &&
@@ -240,7 +242,8 @@ const CompanyDashboard = ({
                       <td
                         className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap cursor-pointer"
                         onClick={() => {
-                          history.push(`/jobs/${job._id}`)
+                          // history.push(`/jobs/${job._id}`)
+                          dispatch({type: 'JobDesc', jobId: job._id})
                         }}
                       >
                         {job?.requisitionNumber}
@@ -248,7 +251,8 @@ const CompanyDashboard = ({
                       <td
                         className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap cursor-pointer"
                         onClick={() => {
-                          history.push(`/jobs/${job._id}`)
+                          // history.push(`/jobs/${job._id}`)
+                          dispatch({type: 'JobDesc', jobId: job._id})
                         }}
                       >
                         {job.positionTitle}
@@ -350,7 +354,9 @@ const CompanyDashboard = ({
                       <td
                         className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap "
                         onClick={() => {
-                          history.push(`/profiles/${app.profile?._id}`)
+                          // history.push(`/profiles/${app.profile?._id}`)
+                          dispatch({type: 'title', title: 'My Applications'})
+                          dispatch({type: 'My Applications'})
                         }}
                       >
                         {app.profile?.firstName} {app.profile?.lastName}
@@ -361,7 +367,9 @@ const CompanyDashboard = ({
                       <td
                         className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap"
                         onClick={() => {
-                          history.push(`/applications/${app._id}`)
+                          // history.push(`/applications/${app._id}`)
+                          dispatch({type: 'title', title: 'My Applications'})
+                          dispatch({type: 'My Applications'})
                         }}
                       >
                         {app.job?.positionTitle}
@@ -580,7 +588,6 @@ const CompanyDashboard = ({
 
   return (
     <div className="mb-64 font-inter">
-      <Navbar />
       {isShow ? (
         <ModelComponent
           isShow={isShow}
@@ -641,7 +648,8 @@ const CompanyDashboard = ({
           <div className="justify-between gap-4 text-teal-600 md:flex md:w-1/2 cursor-pointer">
             <div
               onClick={() => {
-                history.push('/company/jobs')
+                onTabClick(0)
+                // history.push('/company/jobs')
               }}
               className="flex items-center justify-between p-4 mt-4 bg-teal-100 rounded-md md:mt-0 md:items-start md:flex-col md:h-48 md:w-1/3"
             >
@@ -655,7 +663,8 @@ const CompanyDashboard = ({
             </div>
             <div
               onClick={() => {
-                history.push('/company/apllication')
+                onTabClick(1)
+                // history.push('/company/apllication')
               }}
               className="flex items-center justify-between p-4 mt-2 bg-teal-100 rounded-md md:mt-0 md:items-start md:flex-col md:h-48 md:w-1/3 cursor-pointer"
             >
@@ -669,7 +678,8 @@ const CompanyDashboard = ({
             </div>
             <div
               onClick={() => {
-                history.push('/company/employees')
+                onTabClick(2)
+                // history.push('/company/employees')
               }}
               className="flex items-center justify-between p-4 mt-2 bg-teal-100 rounded-md md:mt-0 md:items-start md:flex-col md:h-48 md:w-1/3 cursor-pointer"
             >
