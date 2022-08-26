@@ -10,6 +10,7 @@ import hamburger from '../../assets/images/Hamburger.svg';
 import JobSearchFilled from '../../assets/images/Job-Search-Filled.svg';
 import CarrerDevelopmentFilled from '../../assets/images/CarrerDevelopment.svg';
 import SettingsFilled from '../../assets/images/Settings.svg';
+import Logo from '../../assets/images/Logo.svg';
 import * as actions from '../../store/profile'
 import { useHistory, withRouter } from "react-router-dom";
 import { connect, useSelector, useDispatch } from 'react-redux'
@@ -144,7 +145,7 @@ const DashboardNew = ({ getProfile }) => {
 
 
     return (
-      <div className='flex items-center cursor-pointer' onClick={() => {
+      <div className='pt-3 pb-3 px-4 flex items-center cursor-pointer' onClick={() => {
         setSidebarOpen(false)
         dispatch({ type: 'title', title: 'My Profile' })
         dispatch({ type: 'Profile' })
@@ -166,18 +167,18 @@ const DashboardNew = ({ getProfile }) => {
               }}
             ></div>
           ) : (
-            <p className="font-bold text-center text-blue-900 font-nunito">
+            <p className="font-bold text-center text-black font-nunito">
               {data?.firstName[0]}
             </p>
           )}
         </div>
 
         <div className='ml-2'>
-          <p className="text-sm text-blue-900 font-nunito">
+          <p className={classNames(component.componentName === 'Profile' ? "text-13px text-gray333 font-nunito font-bold" : "text-13px text-bg_gray666 font-nunito font-bold")}>
             {data?.fullName}
           </p>
 
-          <p className="text-sm text-blue-900 font-nunito">
+          <p className="text-sm text-bg_gray666 font-nunito">
             {data?.jobTitle}
           </p>
         </div>
@@ -226,15 +227,19 @@ const DashboardNew = ({ getProfile }) => {
                     <span className="flex w-full justify-between items-center">
                       <span className="flex min-w-0 items-center justify-between">
                         <img
-                          className="w-6 h-6 bg-gray-300 rounded flex-shrink-0"
-                          src={NuleepLogo}
+                          onClick={() => {
+                            dispatch({ type: 'title', title: 'Home' })
+                            dispatch({ type: 'Home' })
+                          }}
+                          className="h-6 rounded flex-shrink-0"
+                          src={Logo}
                           alt=""
                         />
-                        <span className="flex-1 flex flex-col min-w-0">
+                        {/* <span className="flex-1 flex flex-col min-w-0">
                           <span className="text-gray-900 text-xs font-medium truncate">
                             <img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' />
                           </span>
-                        </span>
+                        </span> */}
                       </span>
 
                     </span>
@@ -246,56 +251,61 @@ const DashboardNew = ({ getProfile }) => {
 
                   </div>
 
-                  <div className='w-full'>
+                  <div className='w-full flex flex-row'>
                     {/* {
                       state && userRender(state?.profile?.profile?.userRef.role === 'jobSeeker' && state?.profile?.selectedProfile != null
                         ? state?.profile && state?.profile?.selectedProfile
                         : state?.profile?.profile)
                     } */}
 
-                    <div className='flex items-center px-4 py-3 bg-gray-100 cursor-pointer' onClick={() => {
+                    <div className={classNames(component.componentName === 'Profile' ? 'w-1 bg-black h-full' : 'w-1 bg-gray-100 h-full')}></div>
+                    <div className={classNames(component.componentName === 'Profile' ? 'flex items-center cursor-pointer bg-gray-100 py-3 w-full' : 'flex items-center cursor-pointer bg-white py-3 w-full')} onClick={() => {
                       setSidebarOpen(false)
                       dispatch({ type: 'title', title: 'My Profile' })
                       dispatch({ type: 'Profile' })
                     }}>
-                      <div className="w-5 h-5 bg-blue-100 rounded-full">
-                        {state?.profile?.profile?.profileImg[0] ? (
-                          <div
-                            style={{
-                              backgroundImage: `url(${state?.profile?.profile?.profileImg && state?.profile?.profile?.profileImg[0]?.fullUrl
-                                ? state?.profile?.profile?.profileImg[0]?.fullUrl
-                                : ''
-                                })`,
-                              backgroundPosition: 'center',
-                              backgroundSize: 'cover',
-                              backgroundRepeat: 'no-repeat',
-                              width: '100%',
-                              height: '100%',
-                              borderRadius: '50%',
-                            }}
-                          ></div>
-                        ) : (
-                          <p className="font-bold text-center text-blue-900 font-nunito">
-                            {state?.profile?.profile?.firstName[0]}
+
+                      <div className='flex flex-row px-3 items-center'>
+                        <div className="w-6 h-6 bg-blue-100 rounded-full">
+                          {state?.profile?.profile?.profileImg[0] ? (
+                            <div
+                              style={{
+                                backgroundImage: `url(${state?.profile?.profile?.profileImg && state?.profile?.profile?.profileImg[0]?.fullUrl
+                                  ? state?.profile?.profile?.profileImg[0]?.fullUrl
+                                  : ''
+                                  })`,
+                                backgroundPosition: 'center',
+                                backgroundSize: 'cover',
+                                backgroundRepeat: 'no-repeat',
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '50%',
+                              }}
+                            ></div>
+                          ) : (
+                            <p className="font-bold text-center text-blue-900 font-nunito">
+                              {state?.profile?.profile?.firstName[0]}
+                            </p>
+                          )}
+                        </div>
+                        {/* for small screen */}
+                        <div className='ml-2'>
+                          <p className={classNames(component.componentName === 'Profile' ? "text-13px text-gray333 font-nunito font-bold" : "text-13px text-bg_gray666 font-nunito font-bold")}>
+                            {state?.profile?.profile?.fullName}
                           </p>
-                        )}
+
+                          <p className={classNames(component.componentName === 'Profile' ? "text-sm text-gray333 font-nunito font-bold" : "text-sm text-bg_gray666 font-nunito font-bold")}>
+                            {state?.profile?.profile?.jobTitle}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className='ml-2'>
-                        <p className="text-sm text-blue-900 font-nunito">
-                          {state?.profile?.profile?.fullName}
-                        </p>
-
-                        <p className="text-sm text-blue-900 font-nunito">
-                          {state?.profile?.profile?.jobTitle}
-                        </p>
-                      </div>
                     </div>
 
 
                   </div>
                   <div className="flex flex-col justify-between flex-1 h-0 overflow-y-auto">
-                    <nav className="mt-5">
+                    <nav className="">
                       <div className="space-y-1">
                         {/* Side navigation for mobile screens */}
                         {navigation.map((item) => (
@@ -332,7 +342,7 @@ const DashboardNew = ({ getProfile }) => {
 
                             <div className='flex' >
                               <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
-                              <div className='flex px-2 py-3 text-bg_gray666 text-13px'>
+                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-13px ' : 'flex px-4 py-3 text-bg_gray666 text-13px')}>
                                 {
                                   component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
@@ -362,17 +372,17 @@ const DashboardNew = ({ getProfile }) => {
                     <div>
                       <hr />
                       <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
-                        <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer' onClick={() => {
+                        <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                           dispatch({ type: 'title', title: 'Privacy Policy' })
                           dispatch({ type: 'Privacy' })
                           setSidebarOpen(false)
                         }}>Privacy Policy</label>
-                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer' onClick={() => {
+                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                           dispatch({ type: 'title', title: 'Terms of Use' })
                           dispatch({ type: 'Terms of Use' })
                           setSidebarOpen(false)
                         }}>Terms and Conditions</label>
-                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer'>&copy;2022 Nuleep</label>
+                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer hover:underline decoration-1'>&copy;2022 Nuleep</label>
                       </div>
 
                     </div>
@@ -397,25 +407,32 @@ const DashboardNew = ({ getProfile }) => {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="h-0 flex-1 flex flex-col">
             {/* User account dropdown */}
-            <Menu as="div" className="py-2 relative flex text-left">
+            <Menu as="div" className="relative flex text-left">
               <div className='w-full'>
-                <Menu.Button className="group w-full bg-gray-100 rounded-md px-3.5 py-4 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500">
+                <Menu.Button className="py-4 group w-full bg-gray-100 rounded-md px-1.3rem text-sm text-left font-medium text-gray-700 focus:outline-none focus:ring-offset-gray-100">
                   <span className="flex w-full justify-between items-center">
                     <span className="flex min-w-0 items-center justify-between">
                       <img
-                        className="w-7 h-7 rounded flex-shrink-0"
-                        src={NuleepLogo}
+                        onClick={() => {
+                          dispatch({ type: 'title', title: 'Home' })
+                          dispatch({ type: 'Home' })
+                        }}
+                        className="h-6 rounded flex-shrink-0"
+                        src={Logo}
                         alt=""
                       />
-                      <span className="flex-1 flex flex-col min-w-0">
+                      {/* <span className="flex-1 flex flex-col min-w-0">
                         <span className="text-sm font-medium truncate"><img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' /></span>
-                      </span>
+                      </span> */}
                     </span>
 
                   </span>
                 </Menu.Button>
 
-                <div className='px-5 py-2 w-full bg-bg_white flex-row'>
+                <div className={classNames(component.componentName === 'Profile' ? 'flex w-full bg-bg_white flex-row' : 'flex w-full flex-row')}>
+
+                  <div className={classNames(component.componentName === 'Profile' ? 'h-auto w-1 bg-black' : 'h-auto w-1 bg-white')}></div>
+                  {/* <div className='h-auto w-1 bg-black'></div> */}
                   {
                     state && userRender(state?.profile?.profile?.userRef.role === 'jobSeeker' && state?.profile?.selectedProfile != null
                       ? state?.profile && state?.profile?.selectedProfile
@@ -447,8 +464,8 @@ const DashboardNew = ({ getProfile }) => {
                 </div>
               </div> */}
             {/* Navigation */}
-            <nav className="mt-1 pl-1px">
-              <div className="space-y-1">
+            <nav className="">
+              <div className="">
                 {navigation.map((item) => (
                   <a
                     onClick={() => {
@@ -473,7 +490,7 @@ const DashboardNew = ({ getProfile }) => {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      component.componentName === item.name ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                      component.componentName === item.name ? 'bg-bg_white text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200',
                       'group flex items-center text-sm font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
@@ -481,7 +498,7 @@ const DashboardNew = ({ getProfile }) => {
                     <div className='flex'>
                       {/* w-1 bg-black */}
                       <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
-                      <div className='flex px-2 py-4 text-bg_gray666 text-13px'>
+                      <div className={classNames(component.componentName === item.name ? 'flex px-4 py-4 text-gray333 text-13px font-nunito font-bold' : 'flex px-4 py-4 text-bg_gray666 text-13px font-nunito font-bold')}>
                         {
                           component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(
@@ -512,15 +529,15 @@ const DashboardNew = ({ getProfile }) => {
           <div>
             <hr />
             <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
-              <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer' onClick={() => {
+              <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                 dispatch({ type: 'title', title: 'Privacy Policy' })
                 dispatch({ type: 'Privacy' })
               }}>Privacy Policy</label>
-              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer' onClick={() => {
+              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                 dispatch({ type: 'title', title: 'Terms of Use' })
                 dispatch({ type: 'Terms of Use' })
               }}>Terms and Conditions</label>
-              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer'>&copy;2022 Nuleep</label>
+              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer hover:underline decoration-1'>&copy;2022 Nuleep</label>
             </div>
 
           </div>
@@ -537,12 +554,12 @@ const DashboardNew = ({ getProfile }) => {
               <span className="sr-only">Open sidebar</span>
               {/* Place the NUleep logo here for small devices */}
               <span className='flex flex-row items-center'>
-                <img src={NuleepLogo} className='w-5 h-5' />
-                <span className="">
+                <img src={Logo} className='h-6' />
+                {/* <span className="">
                   <span className="text-sm font-medium truncate">
                     <img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' />
                   </span>
-                </span>
+                </span> */}
               </span>
             </button>
             <div className="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
@@ -578,10 +595,10 @@ const DashboardNew = ({ getProfile }) => {
 
                 {
                   component.componentName === 'Profile' && <div className='flex flex-row sm:hidden'>
-                    <div className='pl-7 pt-1 pb-1 pr-7 border-1px rounded-full border-black'>
+                    <div className='flex items-center  pl-7 pr-7 py-1 border-1px rounded-full border-black'>
                       <label className='text-sm font-normal text-black cursor-pointer'>Print Resume</label>
                     </div>
-                    <div className='ml-2 pl-7 pt-1 pb-1 pr-7 border-1px rounded-full bg-black cursor-pointer' onClick={() => {
+                    <div className='flex items-center ml-2 pl-7 pr-7 py-1 border-1px rounded-full bg-black cursor-pointer' onClick={() => {
                       dispatch({ type: 'preview_public', publicProfile: true })
                     }}>
                       <label className='text-sm font-normal decoration-black cursor-pointer text-bg_skyblue'>Preview Public</label>

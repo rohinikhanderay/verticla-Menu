@@ -25,7 +25,9 @@ module.exports = {
         disable_bg_color: '#E6E6E6',
         bg_white: '#FFFFFF',
         bg_gray666: '#666666',
-        bg_skyblue: '#10E9D4'
+        bg_skyblue: '#10E9D4',
+        gray333: '#333333',
+        lightGray: '#F1F2F4'
       },
 
       screens: {
@@ -54,6 +56,7 @@ module.exports = {
       },
       height: {
         '83vh': '83vh',
+        '50px': '50px'
       },
 
       borderRadius: {
@@ -61,7 +64,8 @@ module.exports = {
       },
 
       padding: {
-        '1px': '1px'
+        '1px': '1px',
+        '1.3rem': '1.3rem'
       },
 
       fontSize: {
