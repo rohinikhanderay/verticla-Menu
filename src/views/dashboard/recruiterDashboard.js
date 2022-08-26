@@ -203,6 +203,7 @@ const RecruiterDashboard = ({
                             className="text-gray-600 cursor-pointer"
                             // to={`company/apllication`}
                             onClick={() => {
+                              dispatch({type: 'title', title: 'Company Dashboard'})
                               dispatch({type: 'company_dashboard'})
                             }}
                           >
@@ -217,6 +218,7 @@ const RecruiterDashboard = ({
                           <span className="text-gray-600">Job(s) Posted</span> */}
                           <div className="text-gray-600" to={`company/jobs`} onClick={() => {
                             dispatch({type: 'company_dashboard'})
+                            dispatch({type: 'title', title: 'Company Dashboard'})
                           }}>
                             {jobs.recruiterJobs?.length} Job(s) Posted
                           </div>

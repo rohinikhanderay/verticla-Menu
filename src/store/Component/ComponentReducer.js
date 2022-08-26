@@ -41,6 +41,9 @@ const ComponentReducer = (state = initialState, action) => {
 
         case 'Terms of Use':
             return { ...state, componentName: 'Terms of Use' }
+        
+        case 'Search Candidates':
+            return {...state, componentName: 'Search Candidates'}
 
         case 'New Application':
             return { ...state, componentName: 'New Application', jobId: action.jobId }
@@ -70,10 +73,13 @@ const ComponentReducer = (state = initialState, action) => {
             return { ...state, publicProfile: action.publicProfile }
 
         case 'Post a new Job':
-            return { ...state, componentName: 'Post-Job' }
+            return { ...state, componentName: 'Post a Job' }
 
         case 'View Applications':
             return { ...state, componentName: 'View Applications' }
+        
+        case 'My Applicants':
+            return {...state, componentName: 'My Applicants'}
 
         case 'View Company Profile':
             return { ...state, componentName: 'Company Profile', organizationId: action.organizationId }
