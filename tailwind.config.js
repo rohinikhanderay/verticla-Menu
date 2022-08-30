@@ -56,7 +56,11 @@ module.exports = {
       },
       height: {
         '83vh': '83vh',
-        '50px': '50px'
+        '80px': '80px',
+        '50px': '50px',
+        '56px': '56px',
+        '73px': '73px',
+        '40px': '40px',
       },
 
       borderRadius: {
@@ -69,7 +73,9 @@ module.exports = {
       },
 
       fontSize: {
-        '13px': '13px'
+        '13px': '13px',
+        '16px': '16px',
+        '14px': '14px'
       },
 
       borderWidth: {

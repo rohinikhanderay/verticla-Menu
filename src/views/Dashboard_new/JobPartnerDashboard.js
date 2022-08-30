@@ -361,7 +361,7 @@ const JobPartnerDashboard = ({ getProfile }) => {
 
                             <div className='flex' >
                               <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
-                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-13px ' : 'flex px-4 py-3 text-bg_gray666 text-13px')}>
+                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-base' : 'flex px-4 py-3 text-bg_gray666 text-base')}>
                                 {
                                   component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
@@ -533,7 +533,7 @@ const JobPartnerDashboard = ({ getProfile }) => {
                     <div className='flex'>
                       {/* w-1 bg-black */}
                       <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
-                      <div className={classNames(component.componentName === item.name ? 'flex px-4 py-4 text-gray333 text-13px font-nunito font-bold' : 'flex px-4 py-4 text-bg_gray666 text-13px font-nunito font-bold')}>
+                      <div className={classNames(component.componentName === item.name ? 'flex px-4 py-4 text-gray333 text-base font-nunito font-bold' : 'flex px-4 py-4 text-bg_gray666 text-base font-nunito font-bold')}>
                         {
                           component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(

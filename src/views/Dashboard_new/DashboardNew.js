@@ -9,7 +9,12 @@ import HomeFilled from '../../assets/images/Home-Filled.svg';
 import hamburger from '../../assets/images/Hamburger.svg';
 import JobSearchFilled from '../../assets/images/Job-Search-Filled.svg';
 import CarrerDevelopmentFilled from '../../assets/images/CarrerDevelopment.svg';
+import HomeOutline from '../../assets/images/Home-Outline.svg';
+import JobSearch from '../../assets/images/Job-Search.svg';
+import CareerDevelopment from '../../assets/images/carrer-development.svg';
+import Setting from '../../assets/images/Setting.svg';
 import SettingsFilled from '../../assets/images/Settings.svg';
+import Logout from '../../assets/images/logout.svg';
 import Logo from '../../assets/images/Logo.svg';
 import * as actions from '../../store/profile'
 import { useHistory, withRouter } from "react-router-dom";
@@ -34,11 +39,11 @@ import BlogDetails from '../blogs/blog';
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeFilled },
-  { name: 'Job Search', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
-  { name: 'Career Development', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
+  { name: 'Home', href: '#', icon: HomeOutline, current: false, iconFilled: HomeFilled },
+  { name: 'Job Search', href: '#', icon: JobSearch, current: false, iconFilled: JobSearchFilled },
+  { name: 'Career Development', href: '#', icon: CareerDevelopment, current: false, iconFilled: CarrerDevelopmentFilled },
 
-  { name: 'Log out', href: '#', icon: LogoutIcon, current: false, iconFilled: LogoutIcon }
+  { name: 'Log out', href: '#', icon: Logout, current: false, iconFilled: LogoutIcon }
 ]
 
 const navigationJobPartner = [
@@ -173,12 +178,12 @@ const DashboardNew = ({ getProfile }) => {
           )}
         </div>
 
-        <div className='ml-2'>
-          <p className={classNames(component.componentName === 'Profile' ? "text-13px text-gray333 font-nunito font-bold" : "text-13px text-bg_gray666 font-nunito font-bold")}>
+        <div className='ml-3'>
+          <p className={classNames(component.componentName === 'Profile' ? "text-base text-gray333 font-nunito font-bold" : "text-base text-bg_gray666 font-nunito font-bold")}>
             {data?.fullName}
           </p>
 
-          <p className="text-sm text-bg_gray666 font-nunito">
+          <p className="text-base font-normal text-bg_gray666 font-nunito">
             {data?.jobTitle}
           </p>
         </div>
@@ -222,8 +227,8 @@ const DashboardNew = ({ getProfile }) => {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative flex-1 flex flex-col w-full pt-5 pb-4 bg-white">
-                  <div className="border-b pb-3 flex-shrink-0 flex items-center px-4">
+                <Dialog.Panel className="relative flex-1 flex flex-col w-full bg-white">
+                  <div className="border-b flex-shrink-0 flex items-center px-4 h-56px">
                     <span className="flex w-full justify-between items-center">
                       <span className="flex min-w-0 items-center justify-between">
                         <img
@@ -231,7 +236,7 @@ const DashboardNew = ({ getProfile }) => {
                             dispatch({ type: 'title', title: 'Home' })
                             dispatch({ type: 'Home' })
                           }}
-                          className="h-6 rounded flex-shrink-0"
+                          className="h-8 rounded flex-shrink-0"
                           src={Logo}
                           alt=""
                         />
@@ -251,7 +256,7 @@ const DashboardNew = ({ getProfile }) => {
 
                   </div>
 
-                  <div className='w-full flex flex-row'>
+                  <div className='w-full flex flex-row h-80px'>
                     {/* {
                       state && userRender(state?.profile?.profile?.userRef.role === 'jobSeeker' && state?.profile?.selectedProfile != null
                         ? state?.profile && state?.profile?.selectedProfile
@@ -290,11 +295,11 @@ const DashboardNew = ({ getProfile }) => {
                         </div>
                         {/* for small screen */}
                         <div className='ml-2'>
-                          <p className={classNames(component.componentName === 'Profile' ? "text-13px text-gray333 font-nunito font-bold" : "text-13px text-bg_gray666 font-nunito font-bold")}>
+                          <p className={classNames(component.componentName === 'Profile' ? "text-base text-gray333 font-nunito font-bold" : "text-base text-bg_gray666 font-nunito font-bold")}>
                             {state?.profile?.profile?.fullName}
                           </p>
 
-                          <p className={classNames(component.componentName === 'Profile' ? "text-sm text-gray333 font-nunito font-bold" : "text-sm text-bg_gray666 font-nunito font-bold")}>
+                          <p className={classNames(component.componentName === 'Profile' ? "text-base font-normal text-gray333 font-nunito" : "text-base font-normal text-bg_gray666 font-nunito")}>
                             {state?.profile?.profile?.jobTitle}
                           </p>
                         </div>
@@ -333,16 +338,16 @@ const DashboardNew = ({ getProfile }) => {
                             href={item.href}
                             className={classNames(
                               component.componentName === item.name
-                                ? 'bg-gray-100 text-gray-900'
+                                ? 'bg-gray-100 text-gray-900 h-56px'
                                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                              'group flex items-center leading-5 font-semibold rounded-md text-xs'
+                              'group flex items-center leading-5 font-semibold rounded-md text-xs h-56px'
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
 
                             <div className='flex' >
-                              <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
-                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-13px ' : 'flex px-4 py-3 text-bg_gray666 text-13px')}>
+                              <div className={classNames(component.componentName === item.name ? 'w-1 bg-black h-56px' : 'w-1 bg-gray-100 h-56px')}></div>
+                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-base items-center' : 'flex px-4 py-3 text-bg_gray666 text-base items-center')}>
                                 {
                                   component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
@@ -350,13 +355,13 @@ const DashboardNew = ({ getProfile }) => {
                                       'mr-3 flex-shrink-0 h-5 w-5'
                                     )}
                                     aria-hidden="true"
-                                  /> : <item.icon
-                                    className={classNames(
-                                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                      'mr-3 flex-shrink-0 h-5 w-5'
-                                    )}
-                                    aria-hidden="true"
-                                  />
+                                  /> : <img src={item.icon}
+                                  className={classNames(
+                                    item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                                    'mr-3 flex-shrink-0 h-5 w-5'
+                                  )}
+                                  aria-hidden="true"
+                                />
                                 }
 
                                 {item.name}
@@ -372,17 +377,17 @@ const DashboardNew = ({ getProfile }) => {
                     <div>
                       <hr />
                       <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
-                        <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
+                        <label className='text-14px text-bg_gray666 font-semibold font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                           dispatch({ type: 'title', title: 'Privacy Policy' })
                           dispatch({ type: 'Privacy' })
                           setSidebarOpen(false)
                         }}>Privacy Policy</label>
-                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
+                        <label className='text-14px text-bg_gray666 font-semibold mt-4 font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                           dispatch({ type: 'title', title: 'Terms of Use' })
                           dispatch({ type: 'Terms of Use' })
                           setSidebarOpen(false)
                         }}>Terms and Conditions</label>
-                        <label className='text-xs text-bg_gray666 font-normal mt-4 font-nunito cursor-pointer hover:underline decoration-1'>&copy;2022 Nuleep</label>
+                        <label className='text-14px text-bg_gray666 font-semibold mt-4 font-nunito'>&copy;2022 Nuleep</label>
                       </div>
 
                     </div>
@@ -409,7 +414,7 @@ const DashboardNew = ({ getProfile }) => {
             {/* User account dropdown */}
             <Menu as="div" className="relative flex text-left">
               <div className='w-full'>
-                <Menu.Button className="py-4 group w-full bg-gray-100 rounded-md px-1.3rem text-sm text-left font-medium text-gray-700 focus:outline-none focus:ring-offset-gray-100">
+                <Menu.Button className="py-4 group w-full bg-gray-100 rounded-md px-1.3rem text-sm text-left font-medium text-gray-700 focus:outline-none focus:ring-offset-gray-100 h-73px">
                   <span className="flex w-full justify-between items-center">
                     <span className="flex min-w-0 items-center justify-between">
                       <img
@@ -417,7 +422,7 @@ const DashboardNew = ({ getProfile }) => {
                           dispatch({ type: 'title', title: 'Home' })
                           dispatch({ type: 'Home' })
                         }}
-                        className="h-6 rounded flex-shrink-0"
+                        className="h-8 rounded flex-shrink-0"
                         src={Logo}
                         alt=""
                       />
@@ -429,7 +434,7 @@ const DashboardNew = ({ getProfile }) => {
                   </span>
                 </Menu.Button>
 
-                <div className={classNames(component.componentName === 'Profile' ? 'flex w-full bg-bg_white flex-row' : 'flex w-full flex-row')}>
+                <div className={classNames(component.componentName === 'Profile' ? 'flex w-full bg-bg_white flex-row h-80px' : 'flex w-full flex-row hover:bg-gray-200 h-80px')}>
 
                   <div className={classNames(component.componentName === 'Profile' ? 'h-auto w-1 bg-black' : 'h-auto w-1 bg-white')}></div>
                   {/* <div className='h-auto w-1 bg-black'></div> */}
@@ -465,7 +470,7 @@ const DashboardNew = ({ getProfile }) => {
               </div> */}
             {/* Navigation */}
             <nav className="">
-              <div className="">
+              <div className="h-56px">
                 {navigation.map((item) => (
                   <a
                     onClick={() => {
@@ -498,7 +503,7 @@ const DashboardNew = ({ getProfile }) => {
                     <div className='flex'>
                       {/* w-1 bg-black */}
                       <div className={classNames(component.componentName === item.name ? 'w-1 bg-black' : 'w-1 bg-gray-100')}></div>
-                      <div className={classNames(component.componentName === item.name ? 'flex px-4 py-4 text-gray333 text-13px font-nunito font-bold' : 'flex px-4 py-4 text-bg_gray666 text-13px font-nunito font-bold')}>
+                      <div className={classNames(component.componentName === item.name ? 'flex px-4 py-4 text-gray333 text-base font-nunito font-bold items-center' : 'flex px-4 py-4 text-bg_gray666 text-base font-nunito font-bold items-center')}>
                         {
                           component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(
@@ -506,13 +511,13 @@ const DashboardNew = ({ getProfile }) => {
                               'mr-3 flex-shrink-0 h-4 w-4 ml-2'
                             )}
                             aria-hidden="true"
-                          /> : <item.icon
-                            className={classNames(
-                              item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-3 flex-shrink-0 h-5 w-5 mx-2'
-                            )}
-                            aria-hidden="true"
-                          />
+                          /> : <img src={item.icon}
+                          className={classNames(
+                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                            'mr-3 flex-shrink-0 h-4 w-4 ml-2'
+                          )}
+                          aria-hidden="true"
+                        />
                         }
 
                         {item.name}
@@ -529,15 +534,15 @@ const DashboardNew = ({ getProfile }) => {
           <div>
             <hr />
             <div className='flex-col flex mt-5 px-2 py-4 ml-4'>
-              <label className='text-xs text-bg_gray666 font-normal font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
+              <label className='text-14px text-bg_gray666 font-semibold font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                 dispatch({ type: 'title', title: 'Privacy Policy' })
                 dispatch({ type: 'Privacy' })
               }}>Privacy Policy</label>
-              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
+              <label className='text-14px text-bg_gray666 font-semibold mt-5 font-nunito cursor-pointer hover:underline decoration-1' onClick={() => {
                 dispatch({ type: 'title', title: 'Terms of Use' })
                 dispatch({ type: 'Terms of Use' })
               }}>Terms and Conditions</label>
-              <label className='text-xs text-bg_gray666 font-normal mt-5 font-nunito cursor-pointer hover:underline decoration-1'>&copy;2022 Nuleep</label>
+              <label className='text-14px text-bg_gray666 font-semibold mt-5 font-nunito'>&copy;2022 Nuleep</label>
             </div>
 
           </div>
@@ -545,7 +550,7 @@ const DashboardNew = ({ getProfile }) => {
         {/* Main column */}
         <div className="lg:pl-64 flex flex-col">
           {/* Search header */}
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden">
+          <div className="sticky top-0 z-10 flex-shrink-0 flex h-56px bg-white border-b border-gray-200 lg:hidden">
             <button
               type="button"
               className="px-4 border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
@@ -554,7 +559,7 @@ const DashboardNew = ({ getProfile }) => {
               <span className="sr-only">Open sidebar</span>
               {/* Place the NUleep logo here for small devices */}
               <span className='flex flex-row items-center'>
-                <img src={Logo} className='h-6' />
+                <img src={Logo} className='h-8' />
                 {/* <span className="">
                   <span className="text-sm font-medium truncate">
                     <img src={NuleepText} className='w-9 h-9 rounded flex-shrink-0' />
@@ -589,16 +594,16 @@ const DashboardNew = ({ getProfile }) => {
           </div>
           <main className="flex-1">
             {/* Page title & actions */}
-            <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-              <div className="flex-1 min-w-0 flex justify-between">
-                <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{component.title}</h1>
+            <div className="flex border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-4 lg:px-8 h-73px sm:h-56px items-center">
+              <div className="flex-1 min-w-0 flex justify-between items-center">
+                <h1 className="sm:text-2xl text-2xl  sm:font-semibold font-semibold text-lg font-medium leading-6 text-gray-900 font-nunito sm:truncate">{component.title}</h1>
 
                 {
                   component.componentName === 'Profile' && <div className='flex flex-row sm:hidden'>
-                    <div className='flex items-center  pl-7 pr-7 py-1 border-1px rounded-full border-black'>
+                    <div className='flex items-center  pl-7 pr-7 py-1 border-1px rounded-full border-black h-40px'>
                       <label className='text-sm font-normal text-black cursor-pointer'>Print Resume</label>
                     </div>
-                    <div className='flex items-center ml-2 pl-7 pr-7 py-1 border-1px rounded-full bg-black cursor-pointer' onClick={() => {
+                    <div className='flex items-center ml-2 pl-7 pr-7 py-1 border-1px rounded-full bg-black cursor-pointer h-40px' onClick={() => {
                       dispatch({ type: 'preview_public', publicProfile: true })
                     }}>
                       <label className='text-sm font-normal decoration-black cursor-pointer text-bg_skyblue'>Preview Public</label>
