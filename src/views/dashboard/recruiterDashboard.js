@@ -119,7 +119,6 @@ const RecruiterDashboard = ({
   ]
   return (
     <div>
-      <Navbar />
 
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <main className="pb-8 pb-48 mt-8">
@@ -200,22 +199,29 @@ const RecruiterDashboard = ({
                             Open Application(s)
                           </span> */}
 
-                          <Link
-                            className="text-gray-600"
-                            to={`company/apllication`}
+                          <div
+                            className="text-gray-600 cursor-pointer"
+                            // to={`company/apllication`}
+                            onClick={() => {
+                              dispatch({type: 'title', title: 'Company Dashboard'})
+                              dispatch({type: 'company_dashboard'})
+                            }}
                           >
                             {application.recruiterApplications?.length} Open
                             Application(s)
-                          </Link>
+                          </div>
                         </div>
-                        <div className="px-6 py-5 text-sm font-medium text-center grid-row-3">
+                        <div className="px-6 py-5 text-sm font-medium text-center grid-row-3 cursor-pointer">
                           {/* <span className="text-gray-900">
                             {jobs.recruiterJobs?.length}
                           </span>{" "}
                           <span className="text-gray-600">Job(s) Posted</span> */}
-                          <Link className="text-gray-600" to={`company/jobs`}>
+                          <div className="text-gray-600" to={`company/jobs`} onClick={() => {
+                            dispatch({type: 'company_dashboard'})
+                            dispatch({type: 'title', title: 'Company Dashboard'})
+                          }}>
                             {jobs.recruiterJobs?.length} Job(s) Posted
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -263,9 +269,13 @@ const RecruiterDashboard = ({
                           </div>
                           <div className="mt-8">
                             <h3 className="text-lg font-medium">
-                              <Link
+                              <div
                                 to={action.href}
-                                className="focus:outline-none"
+                                className="focus:outline-none cursor-pointer"
+                                onClick={() => {
+                                  dispatch({title: action.name, type: 'title'})
+                                  dispatch({type: action.name, organizationId: profileData?.profile?.organization?._id})
+                                }}
                               >
                                 {/* Extend touch target to entire panel */}
                                 <span
@@ -273,7 +283,7 @@ const RecruiterDashboard = ({
                                   aria-hidden="true"
                                 />
                                 {action.name}
-                              </Link>
+                              </div>
                             </h3>
                             <p className="mt-2 text-sm text-gray-500">
                               {action.description}
@@ -370,12 +380,16 @@ const RecruiterDashboard = ({
                           </ul>
                         </div>
                         <div className="mt-6">
-                          <Link
+                          <div
+                            onClick={() => {
+                              dispatch({type: 'title', title: 'Applications'})
+                                dispatch({type: 'My Applications'})
+                            }}
                             to="/applications"
-                            className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                            className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 cursor-pointer"
                           >
                             View More
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

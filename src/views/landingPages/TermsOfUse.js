@@ -6,9 +6,9 @@ import Navbar from '../../components/layouts/navbar';
 const TermsOfUse = () => {
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <article class="prose lg:prose-xl mx-auto px-4 lg:px-8 mb-48 mt-8">
-                <h2>Terms of Use</h2>
+                {/* <h2>Terms of Use</h2> */}
                 <p>
                     Welcome to Nuleep, Inc. . We visually reflect the lifestyle
                     and career trends that our job seekers care through a mobile
@@ -707,7 +707,7 @@ const TermsOfUse = () => {
                     Burbank Blvd. #7216 Burbank, California 91506
                 </p>
             </article>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };

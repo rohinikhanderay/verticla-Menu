@@ -5,9 +5,8 @@ import Footer from '../../components/layouts/Footer';
 const PrivacyPolicy = () => {
     return (
         <div>
-            <Navbar />
             <article class="prose lg:prose-xl mx-auto px-4 lg:px-8 mb-48 mt-8">
-                <h2>Privacy policy</h2>
+                {/* <h2>Privacy policy</h2> */}
                 <p class>
                     Protecting your private information is our priority. This
                     Statement of Privacy applies to www.nuleep.com, Nuleep’s
@@ -311,7 +310,6 @@ const PrivacyPolicy = () => {
                 <p>info@nuleep.com</p>
                 <p>Effective as of July 01, 2021</p>
             </article>
-            <Footer />
         </div>
     );
 };

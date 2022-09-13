@@ -9,13 +9,7 @@ import HomeFilled from '../../assets/images/Home-Filled.svg';
 import hamburger from '../../assets/images/Hamburger.svg';
 import JobSearchFilled from '../../assets/images/Job-Search-Filled.svg';
 import CarrerDevelopmentFilled from '../../assets/images/CarrerDevelopment.svg';
-import HomeOutline from '../../assets/images/Home-Outline.svg';
-import JobSearch from '../../assets/images/Job-Search.svg';
-import CareerDevelopment from '../../assets/images/carrer-development.svg';
-import Setting from '../../assets/images/Setting.svg';
 import SettingsFilled from '../../assets/images/Settings.svg';
-import Logout from '../../assets/images/logout.svg';
-import Logo from '../../assets/images/Logo.svg';
 import * as actions from '../../store/profile'
 import { useHistory, withRouter } from "react-router-dom";
 import { connect, useSelector, useDispatch } from 'react-redux'
@@ -28,6 +22,8 @@ import Profile from '../NewProfile/profile';
 import Blogs from '../blogs/index'
 import NewApplication from '../applications/NewApplication'
 import { signoutUser } from '../../store/auth/index'
+
+import Logo from '../../assets/images/Logo.svg';
 // import Applica÷
 import Jobs from '../jobs/Jobs';
 import Skill from '../profile/Skill';
@@ -36,17 +32,15 @@ import PrivacyPolicy from '../landingPages/PrivacyPolicy';
 import TermsOfUse from '../landingPages/TermsOfUse';
 import Job from '../jobs/Job';
 import BlogDetails from '../blogs/blog';
+import CompanyDashboard from '../company/CompanyDashboard';
+import ViewJob from '../../views/jobs/ViewJob'
+import EditJob from '../jobs/EditJob';
+import CreateJob from '../jobs/CreateJob';
+import Company from '../company/Company';
+import Candidates from '../profile/Candidates';
 
 // { name: 'Settings', href: '#', icon: CogIcon, current: false, iconFilled: SettingsFilled },
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeOutline, current: false, iconFilled: HomeFilled },
-  { name: 'Job Search', href: '#', icon: JobSearch, current: false, iconFilled: JobSearchFilled },
-  { name: 'Career Development', href: '#', icon: CareerDevelopment, current: false, iconFilled: CarrerDevelopmentFilled },
-
-  { name: 'Log out', href: '#', icon: Logout, current: false, iconFilled: LogoutIcon }
-]
-
-const navigationJobPartner = [
   { name: 'Home', href: '#', icon: HomeIcon, current: false, iconFilled: HomeFilled },
   { name: 'Post a Job', href: '#', icon: DocumentSearchIcon, current: false, iconFilled: JobSearchFilled },
   { name: 'My Applicants', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
@@ -54,7 +48,6 @@ const navigationJobPartner = [
   { name: 'Company Dashboard', href: '#', icon: AcademicCapIcon, current: false, iconFilled: CarrerDevelopmentFilled },
   { name: 'Log out', href: '#', icon: LogoutIcon, current: false, iconFilled: LogoutIcon }
 ]
-
 
 
 
@@ -104,11 +97,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const DashboardNew = ({ getProfile }) => {
+const JobPartnerDashboard = ({ getProfile }) => {
 
   const dispatch = useDispatch()
   const state = useSelector(state => state)
   const component = useSelector(state => state.component)
+
+  console.log(component)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(navigation[0])
@@ -155,7 +150,7 @@ const DashboardNew = ({ getProfile }) => {
         dispatch({ type: 'title', title: 'My Profile' })
         dispatch({ type: 'Profile' })
       }}>
-        <div className="w-32px h-32px bg-blue-100 rounded-full">
+        <div className="w-32px h-32px flex justify-center items-center bg-blue-100 rounded-full">
           {data?.profileImg[0] ? (
             <div
               style={{
@@ -178,7 +173,7 @@ const DashboardNew = ({ getProfile }) => {
           )}
         </div>
 
-        <div className='ml-4'>
+        <div className='ml-3'>
           <p className={classNames(component.componentName === 'Profile' ? "text-base text-gray333 font-nunito font-bold" : "text-base text-bg_gray666 font-nunito font-bold")}>
             {data?.fullName}
           </p>
@@ -228,7 +223,7 @@ const DashboardNew = ({ getProfile }) => {
                 leaveTo="-translate-x-full"
               >
                 <Dialog.Panel className="relative flex-1 flex flex-col w-full bg-white">
-                  <div className="border-b flex-shrink-0 flex items-center px-4 h-56px">
+                <div className="border-b flex-shrink-0 flex items-center px-4 h-56px">
                     <span className="flex w-full justify-between items-center">
                       <span className="flex min-w-0 items-center justify-between">
                         <img
@@ -256,7 +251,11 @@ const DashboardNew = ({ getProfile }) => {
 
                   </div>
 
-                  <div className='w-full flex flex-row h-80px'>
+                  <div className='w-full flex flex-row cursor-pointer h-80px' onClick={() => {
+                    setSidebarOpen(false)
+                    dispatch({ type: 'title', title: 'My Profile' })
+                    dispatch({ type: 'Profile' })
+                  }}>
                     {/* {
                       state && userRender(state?.profile?.profile?.userRef.role === 'jobSeeker' && state?.profile?.selectedProfile != null
                         ? state?.profile && state?.profile?.selectedProfile
@@ -264,14 +263,10 @@ const DashboardNew = ({ getProfile }) => {
                     } */}
 
                     <div className={classNames(component.componentName === 'Profile' ? 'w-1 bg-black h-full' : 'w-1 bg-gray-100 h-full')}></div>
-                    <div className={classNames(component.componentName === 'Profile' ? 'flex items-center cursor-pointer bg-gray-100 py-3 w-full' : 'flex items-center cursor-pointer bg-white py-3 w-full')} onClick={() => {
-                      setSidebarOpen(false)
-                      dispatch({ type: 'title', title: 'My Profile' })
-                      dispatch({ type: 'Profile' })
-                    }}>
+                    <div className={classNames(component.componentName === 'Profile' ? 'flex items-center cursor-pointer bg-gray-100 py-3 w-full' : 'flex items-center cursor-pointer bg-white py-3 w-full')} >
 
-                      <div className='flex flex-row px-3 items-center'>
-                        <div className="w-24px h-24px bg-blue-100 rounded-full">
+                      <div className='flex flex-row px-4 items-center'>
+                        <div className="w-32px h-32px flex justify-center items-center bg-blue-100 rounded-full">
                           {state?.profile?.profile?.profileImg[0] ? (
                             <div
                               style={{
@@ -294,12 +289,12 @@ const DashboardNew = ({ getProfile }) => {
                           )}
                         </div>
                         {/* for small screen */}
-                        <div className='ml-4'>
+                        <div className='ml-2'>
                           <p className={classNames(component.componentName === 'Profile' ? "text-base text-gray333 font-nunito font-bold" : "text-base text-bg_gray666 font-nunito font-bold")}>
                             {state?.profile?.profile?.fullName}
                           </p>
 
-                          <p className={classNames(component.componentName === 'Profile' ? "text-base font-normal text-gray333 font-nunito" : "text-base font-normal text-bg_gray666 font-nunito")}>
+                          <p className={classNames(component.componentName === 'Profile' ? "text-base font-normal text-gray333 font-nunito font-bold" : "text-base font-normal text-bg_gray666 font-nunito font-bold")}>
                             {state?.profile?.profile?.jobTitle}
                           </p>
                         </div>
@@ -316,17 +311,36 @@ const DashboardNew = ({ getProfile }) => {
                         {navigation.map((item) => (
                           <div
                             onClick={() => {
-                              dispatch({ type: item.name })
+                              console.log(item.name)
+                              // dispatch({ type: item.name })
                               switch (item.name) {
                                 case 'Home':
                                   dispatch({ type: 'title', title: 'Home' })
+                                  dispatch({ type: item.name })
                                   break;
-                                case 'Job Search':
-                                  dispatch({ type: 'title', title: 'Jobs & Internships' })
+                                case 'Post a Job':
+                                  dispatch({ title: 'Post a new Job', type: 'Post a new Job' })
+                                  // dispatch({type: 'View Company Profile', organizationId: profileData?.profile?.organization?._id})
                                   break;
-                                case 'Career Development':
-                                  dispatch({ type: 'title', title: 'Skills & Certifications' })
+        
+                                case 'My Applicants':
+                                  dispatch({ type: 'title', title: 'My Applicants' })
+                                  // dispatch({ type: 'My Applications' })
+                                  dispatch({ type: item.name })
                                   break;
+                                
+                                case 'Search Candidates':
+                                  dispatch({ type: 'title', title: 'Search Candidate' })
+                                  // dispatch({ type: 'My Applications' })
+                                  dispatch({ type: item.name })
+                                  break;
+        
+                                case 'Company Dashboard':
+                                  dispatch({ type: 'title', title: 'Company Dashboard' })
+                                  // dispatch({ type: 'My Applications' })
+                                  dispatch({ type: 'company_dashboard' })
+                                  break;
+        
                                 case 'Log out':
                                   signOut()
                                   break;
@@ -347,21 +361,21 @@ const DashboardNew = ({ getProfile }) => {
 
                             <div className='flex' >
                               <div className={classNames(component.componentName === item.name ? 'w-1 bg-black h-56px' : 'w-1 bg-gray-100 h-56px')}></div>
-                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-base items-center' : 'flex px-4 py-3 text-bg_gray666 text-base items-center')}>
+                              <div className={classNames(component.componentName === item.name ? 'flex px-5 py-3 text-bg_gray333 text-base items-center' : 'flex px-5 py-3 text-bg_gray666 text-base items-center')}>
                                 {
                                   component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
                                       item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                      'mr-5 flex-shrink-0 h-24px w-24px'
+                                      'mr-4 flex-shrink-0 h-24px w-24px'
                                     )}
                                     aria-hidden="true"
-                                  /> : <img src={item.icon}
-                                  className={classNames(
-                                    item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                    'mr-5 flex-shrink-0 h-24px w-24px'
-                                  )}
-                                  aria-hidden="true"
-                                />
+                                  /> : <item.icon
+                                    className={classNames(
+                                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                                      'mr-4 flex-shrink-0 h-24px w-24px'
+                                    )}
+                                    aria-hidden="true"
+                                  />
                                 }
 
                                 {item.name}
@@ -387,7 +401,7 @@ const DashboardNew = ({ getProfile }) => {
                           dispatch({ type: 'Terms of Use' })
                           setSidebarOpen(false)
                         }}>Terms and Conditions</label>
-                        <label className='text-14px text-bg_gray666 font-semibold mt-4 font-nunito'>&copy;2022 Nuleep</label>
+                        <label className='text-semibold text-bg_gray666 font-semibold mt-4 font-nunito'>&copy;2022 Nuleep</label>
                       </div>
 
                     </div>
@@ -477,19 +491,35 @@ const DashboardNew = ({ getProfile }) => {
                       switch (item.name) {
                         case 'Home':
                           dispatch({ type: 'title', title: 'Home' })
+                          dispatch({ type: item.name })
                           break;
-                        case 'Job Search':
-                          dispatch({ type: 'title', title: 'Jobs & Internships' })
+                        case 'Post a Job':
+                          dispatch({ title: 'Post a new Job', type: 'Post a new Job' })
+                          // dispatch({type: 'View Company Profile', organizationId: profileData?.profile?.organization?._id})
                           break;
-                        case 'Career Development':
-                          dispatch({ type: 'title', title: 'Skills & Certifications' })
+
+                        case 'My Applicants':
+                          dispatch({ type: 'title', title: 'My Applicants' })
+                          // dispatch({ type: 'My Applications' })
+                          dispatch({ type: item.name })
                           break;
+                        
+                        case 'Search Candidates':
+                          dispatch({ type: 'title', title: 'Search Candidate' })
+                          // dispatch({ type: 'My Applications' })
+                          dispatch({ type: item.name })
+                          break;
+
+                        case 'Company Dashboard':
+                          dispatch({ type: 'title', title: 'Company Dashboard' })
+                          // dispatch({ type: 'My Applications' })
+                          dispatch({ type: 'company_dashboard' })
+                          break;
+
                         case 'Log out':
                           signOut()
                           break;
                       }
-
-                      dispatch({ type: item.name })
                       onSelectItem(item)
                     }}
                     key={item.name}
@@ -508,16 +538,16 @@ const DashboardNew = ({ getProfile }) => {
                           component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(
                               item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-5 flex-shrink-0 h-24px w-24px ml-2'
+                              'mr-5 flex-shrink-0 h-4 w-4 ml-2'
                             )}
                             aria-hidden="true"
-                          /> : <img src={item.icon}
-                          className={classNames(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-5 flex-shrink-0 h-24px w-24px ml-2'
-                          )}
-                          aria-hidden="true"
-                        />
+                          /> : <item.icon
+                            className={classNames(
+                              item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                              'mr-5 flex-shrink-0 h-5 w-5 mx-2'
+                            )}
+                            aria-hidden="true"
+                          />
                         }
 
                         {item.name}
@@ -542,7 +572,7 @@ const DashboardNew = ({ getProfile }) => {
                 dispatch({ type: 'title', title: 'Terms of Use' })
                 dispatch({ type: 'Terms of Use' })
               }}>Terms and Conditions</label>
-              <label className='text-14px text-bg_gray666 font-semibold mt-5 font-nunito'>&copy;2022 Nuleep</label>
+              <label className='text-14px text-bg_gray666 font-normal mt-5 font-nunito'>&copy;2022 Nuleep</label>
             </div>
 
           </div>
@@ -596,21 +626,21 @@ const DashboardNew = ({ getProfile }) => {
             {/* Page title & actions */}
             <div className="flex border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-4 lg:px-8 h-73px sm:h-56px items-center">
               <div className="flex-1 min-w-0 flex justify-between items-center">
-                <h1 className="sm:text-2xl text-2xl  sm:font-semibold font-semibold text-lg font-medium leading-6 text-gray-900 font-nunito sm:truncate">{component.title}</h1>
+              <h1 className="sm:text-2xl text-2xl  sm:font-semibold font-semibold text-lg font-medium leading-6 text-gray-900 font-nunito sm:truncate">{component.title}</h1>
 
-                {
+                {/* {
                   component.componentName === 'Profile' && <div className='flex flex-row sm:hidden'>
-                    <div className='flex items-center  pl-7 pr-7 py-1 border-1px rounded-full border-black h-40px'>
+                    <div className='flex items-center  pl-7 pr-7 py-1 border-1px rounded-full border-black'>
                       <label className='text-sm font-normal text-black cursor-pointer'>Print Resume</label>
                     </div>
-                    <div className='flex items-center ml-2 pl-7 pr-7 py-1 border-1px rounded-full bg-black cursor-pointer h-40px' onClick={() => {
+                    <div className='flex items-center ml-2 pl-7 pr-7 py-1 border-1px rounded-full bg-black cursor-pointer' onClick={() => {
                       dispatch({ type: 'preview_public', publicProfile: true })
                     }}>
                       <label className='text-sm font-normal decoration-black cursor-pointer text-bg_skyblue'>Preview Public</label>
                     </div>
 
                   </div>
-                }
+                } */}
 
               </div>
 
@@ -625,12 +655,12 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
-                state?.profile?.profile?.userRef.role === "jobSeeker" &&
-                <JobSeekerDashboard profile={state.profile} updateSublink={updateSublink} />
+                state?.profile?.profile?.userRef.role === "recruiter" &&
+                <RecruiterDashboard profile={state.profile} updateSublink={updateSublink} />
               }
               {
-                component.componentName === 'Job Search' &&
-                <Jobs />
+                component.componentName === 'Company Dashboard' &&
+                <CompanyDashboard type={"apllication"} />
               }
 
               {
@@ -680,6 +710,45 @@ const DashboardNew = ({ getProfile }) => {
                 <BlogDetails blogId={component.blogId} />
               }
 
+              {
+                component.componentName === 'View Jobs' &&
+                <ViewJob jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'Edit Job' &&
+                <EditJob jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'Profiles' &&
+                <Profile profile_Id={component.profileId} />
+              }
+
+              {
+                component.componentName === 'Post a Job' &&
+                <CreateJob />
+              }
+
+              {
+                component.componentName === 'View Applications' &&
+                <Applications />
+              }
+
+              {
+                component.componentName === 'Company Profile' &&
+                <Company orgId={component.organizationId} />
+              }
+
+              {
+                component.componentName === 'My Applicants' &&
+                <Applications />
+              }
+
+              {
+                component.componentName === 'Search Candidates' &&
+                <Candidates />
+              }
             </div>
 
             {/* Projects table (small breakpoint and up) */}
@@ -688,13 +757,13 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Home' &&
                 !state?.profile.loading &&
                 state.profile &&
-                state?.profile?.profile?.userRef.role === "jobSeeker" &&
-                <JobSeekerDashboard profile={state.profile} />
+                state?.profile?.profile?.userRef.role === "recruiter" &&
+                <RecruiterDashboard profile={state.profile} />
 
               }
               {
-                component.componentName === 'Job Search' &&
-                <Jobs />
+                component.componentName === 'Company Dashboard' &&
+                <CompanyDashboard type={"apllication"} />
               }
               {
                 component.componentName === 'Career Development' &&
@@ -741,6 +810,46 @@ const DashboardNew = ({ getProfile }) => {
                 component.componentName === 'Blog Details' &&
                 <BlogDetails blogId={component.blogId} />
               }
+              {
+                component.componentName === 'View Jobs' &&
+                <ViewJob jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'Edit Job' &&
+                <EditJob jobId={component.jobId} />
+              }
+
+              {
+                component.componentName === 'Profiles' &&
+                <Profile profile_Id={component.profileId} />
+              }
+
+              {
+                component.componentName === 'Post a Job' &&
+                <CreateJob />
+              }
+
+              {
+                component.componentName === 'View Applications' &&
+                <Applications />
+              }
+
+              {
+                component.componentName === 'Company Profile' &&
+                <Company orgId={component.organizationId} />
+              }
+
+              {
+                component.componentName === 'My Applicants' &&
+                <Applications />
+              }
+
+              {
+                component.componentName === 'Search Candidates' &&
+                <Candidates />
+              }
+
             </div>
           </main>
         </div>
@@ -758,4 +867,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default withRouter(connect(mapStateToProps, actions)(DashboardNew));
+export default withRouter(connect(mapStateToProps, actions)(JobPartnerDashboard));

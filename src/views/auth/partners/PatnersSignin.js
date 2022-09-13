@@ -7,6 +7,7 @@ import nuleep from '../../../assets/landingPages/nuleepLogo.png'
 import { useEffect } from 'react'
 import GoogleLogin from '../../../components/GoogleLogin'
 import BetaSignage from '../../../components/layouts/betaSignage'
+
 class PartnersSignin extends React.Component {
   componentDidMount() {
     this.props.clearErrors()

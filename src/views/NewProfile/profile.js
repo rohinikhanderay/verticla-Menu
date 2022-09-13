@@ -13,12 +13,15 @@ import {
 import { Skills } from './Skills';
 
 const profileId = '';
-const Profile = ({ match }) => {
+const Profile = ({ match, profile_Id}) => {
   const [publicProfile, setPublicProfile] = useState(false);
   const [profileId, setProfileId] = useState('');
   const [options, setOptions] = useState();
   const dispatch = useDispatch();
   const profileData = useSelector((state) => state.profile)
+  const componentReducer = useSelector(state => state.component)
+
+  console.log(componentReducer)
   useEffect(() => {
     dispatch(getImages({ containerName: 'imagegallery' }))
     dispatch(getInterestImages({ containerName: 'interestimages' }))
@@ -56,21 +59,22 @@ const Profile = ({ match }) => {
   }, [profileData, setOptions, setPublicProfile])
 
   useEffect(() => {
-    if(!profileId || profileId !== match.params.id){
-      setProfileId(match.params.id);
-      dispatch(viewProfile(match.params.id));
+    if(!profileId || profileId !== profile_Id){
+      setProfileId(profile_Id);
+      dispatch(viewProfile(profile_Id));
     }
-  }, [match])
+  }, [profile_Id])
 
   return (
     <>
       <div>
-        <Navbar />
-        {!publicProfile && (
+        {/* <Navbar /> */}
+        {!componentReducer.publicProfile && (
           <div className="xs:py-4 md:p-8 flex flex-1 gap-2 flex-col w-full font-roboto">
               <div className="flex justify-end xs:px-4">
-              {/* <button type="button" className="text-teal-700 border-2 rounded-full  border-teal-700 w-42 pl-3 pr-3 py-1 mr-3" onClick={() => setPublicProfile(true)}> Resume</button> */}
-              <button type="button" className="text-white border-2 rounded-full bg-teal-600 hover:bg-teal-600 hover:text-white border-teal-600 w-42 pl-3 pr-3 py-1" onClick={() => setPublicProfile(true)}> Preview Public</button></div>
+              {/* <button type="button" className="text-teal-700 border-2 rounded-full  border-teal-700 w-42 pl-3 pr-3 py-1 mr-3" onClick={() => setPublicProfile(true)}> Resume</button> 
+              <button type="button" className="text-white border-2 rounded-full bg-teal-600 hover:bg-teal-600 hover:text-white border-teal-600 w-42 pl-3 pr-3 py-1" onClick={() => setPublicProfile(true)}> Preview Public</button>  */}
+              </div>
               <div className="flex flex-1 md:gap-8 flex-col w-full">
               <ProfileInfo selectedProfile={profileData?.selectedProfile}/>
               <CareerJourney selectedProfile={profileData?.selectedProfile}/>
@@ -78,9 +82,9 @@ const Profile = ({ match }) => {
               <Awards selectedProfile={profileData?.selectedProfile}/>
               <Education selectedProfile={profileData?.selectedProfile}/></div>
         </div>)}
-        {publicProfile && (
+        {componentReducer.publicProfile && (
           <PreviewPublic selectedProfile={profileData?.selectedProfile} roletype={profileData?.profile?.type} resetPublicProfile={() => setPublicProfile(false)}/>)}
-      <Footer />
+      {/* <Footer /> */}
     </div>
     </>
   );

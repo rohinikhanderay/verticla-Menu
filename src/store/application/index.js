@@ -79,7 +79,7 @@ export const getIndividualApplication = (id, history) => async (dispatch) => {
             type: APPLICATION_ERROR,
             payload: err,
         });
-        history.push(`/dashboard`);
+        // history.push(`/dashboard`);
     }
 };
 

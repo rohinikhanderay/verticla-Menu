@@ -67,9 +67,9 @@ const Blogs = () => {
   }
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container m-auto px-5">
-        <div className="mb-3 mt-5 w-11/12 m-auto xs:mb-14">
+        {/* <div className="mb-3 mt-5 w-11/12 m-auto xs:mb-14">
           <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl">
             <svg
               viewBox="0 0 32 32"
@@ -90,11 +90,12 @@ const Blogs = () => {
             </svg>
             Blogs
           </h1>
-        </div>
+        </div> */}
         <>
           <div className="mx-auto my-auto flex flex-wrap -mx-4 mt-10">
             {blogData?.blog &&
               blogData?.blog?.data?.map((item, index) => {
+                
                 return (
                   <div className="bg-gray-50 md:bg-white md:shadow-xl rounded-lg mb-6 sm:w-full md:w-1/2 xl:w-1/3 px-4">
                     <a rel="noreferrer noopener" href="#">
@@ -148,13 +149,18 @@ const Blogs = () => {
                           </div>
                         </a>
                         <div className="flex items-center">
-                          <Link
+                          <div
+                          
+                            onClick={() => {
+                              dispatch({ type: 'title', title: 'Blog Details' })
+                              dispatch({type: 'Blog Details', blogId: item._id})
+                            }}
                             key={index}
                             to={`/blog/${item._id}`}
-                            className="bg-teal-500 hover:bg-teal-600 text-white rounded-full px-8 py-2 sm:px-4 sm:text-sm"
+                            className="bg-teal-500 hover:bg-teal-600 text-white rounded-full px-8 py-2 sm:px-4 sm:text-sm cursor-pointer"
                           >
                             Read More
-                          </Link>
+                          </div>
                           <span className="ml-3 flex cursor-pointer">
                             {item?.likes?.includes(
                               profileData?.profile?._id,
@@ -206,7 +212,7 @@ const Blogs = () => {
           </center>
         </>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

@@ -9,6 +9,7 @@ import {
   LocationMarkerIcon,
   UsersIcon,
 } from '@heroicons/react/solid'
+import {useDispatch} from 'react-redux'
 
 const RecruiterApplicationContainer = ({
   getAllRecruiterJobs,
@@ -16,6 +17,9 @@ const RecruiterApplicationContainer = ({
   jobs,
   application,
 }) => {
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
     getAllRecruiterJobs()
     getRecruiterApplications()
@@ -36,7 +40,9 @@ const RecruiterApplicationContainer = ({
     jobs.recruiterJobs?.forEach((job, index) => {
       results.push(
         <li key={job._id}>
-          <Link to={`/jobs/${job._id}/view`} className="block hover:bg-gray-50">
+          <div to={`/jobs/${job._id}/view`} className="block hover:bg-gray-50 cursor-pointer" onClick={() => {
+            dispatch({type: 'View Jobs', jobId: job._id})
+          }}>
             <div className="px-4 py-4 sm:px-6">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-teal-600 truncate">
@@ -85,12 +91,11 @@ const RecruiterApplicationContainer = ({
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
 
           <div
-            className={`${
-              itemSel.some((x) => x.key === index) ? 'acco-btn-active' : ''
-            } px-4 py-4 acco-btn`}
+            className={`${itemSel.some((x) => x.key === index) ? 'acco-btn-active' : ''
+              } px-4 py-4 acco-btn`}
           >
             <button
               onClick={() => {
@@ -222,11 +227,9 @@ const RecruiterApplicationContainer = ({
     <div>
       <div className="py-10">
         <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold leading-tight text-gray-700">
-            Applications
-          </h1>
+          
           <div>
-            <div className="flex justify-between gap-6 mt-8">
+            <div className="flex justify-between gap-6">
               <div className="w-full p-4 border rounded">
                 <p>{application.recruiterApplications?.length}</p>
                 <p>Total Applicants</p>
@@ -241,9 +244,8 @@ const RecruiterApplicationContainer = ({
               Jobs
             </p>
             <div
-              className={`mt-4 overflow-hidden bg-white sm:rounded-md ${
-                jobs.recruiterJobs?.length != 0 ? 'shadow' : ''
-              } `}
+              className={`mt-4 overflow-hidden bg-white sm:rounded-md ${jobs.recruiterJobs?.length != 0 ? 'shadow' : ''
+                } `}
             >
               {jobs.recruiterJobs?.length != 0 ? (
                 <ul className="divide-y divide-gray-200">{renderJobs()}</ul>

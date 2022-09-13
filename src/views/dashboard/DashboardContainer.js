@@ -9,6 +9,8 @@ import RecruiterDashboard from './recruiterDashboard'
 import { socketEstablish } from '../../store/chat/index'
 import Unapproved from '../../components/layouts/unApprove'
 import BetaSign from '../../components/layouts/betaSignage'
+import DashboardNew from '../Dashboard_new/DashboardNew'
+import JobPartnerDashboard from '../Dashboard_new/JobPartnerDashboard'
 
 const Dashboard = ({ getProfile, profile, history }) => {
   const dispatch = useDispatch()
@@ -41,14 +43,14 @@ const Dashboard = ({ getProfile, profile, history }) => {
   return (
     <div className="min-h-screen">
       {profile.profile?.userRef.role === 'jobSeeker' && (
-        <JobSeekerDashboard
+        <DashboardNew
           profile={profile}
           loginVal={history.location.state?.login ? true : false}
         />
       )}
       {profile.profile?.userRef.role === 'recruiter' &&
       profile.profile.organizationApproved ? (
-        <RecruiterDashboard loading={history.location.state ? true : false} />
+        <JobPartnerDashboard loading={history.location.state ? true : false} />
       ) : (
         profile.profile?.userRef.role === 'recruiter' && <Unapproved />
       )}

@@ -7,6 +7,7 @@ import Footer from '../../components/layouts/Footer'
 import * as profileActions from '../../store/profile'
 import Navbar from '../../components/layouts/navbar'
 import { numberWithCommas } from '../../components/common/commonHelper'
+import {useDispatch} from 'react-redux'
 import {
   LocationMarkerIcon,
   MailIcon,
@@ -25,11 +26,15 @@ const Job = ({
   application: { applications },
   history,
   getProfileApplications,
+  jobId
 }) => {
   useEffect(() => {
-    viewJob(match.params.id, history)
+    viewJob(jobId, history)
     getProfileApplications()
-  }, [viewJob, getProfileApplications, match, history])
+  }, [viewJob, getProfileApplications, jobId, history])
+
+
+  const dispatch = useDispatch()
 
   if (loading) {
     return <Spinner />
@@ -53,8 +58,10 @@ const Job = ({
   //   }
   // }
   const renderButton = () => {
-    if (applications?.find((app) => app.job._id === match.params.id)) {
-      const appId = applications?.find((app) => app.job._id === match.params.id)
+
+
+    if (applications?.find((app) => app.job._id === jobId)) {
+      const appId = applications?.find((app) => app.job._id === jobId)
       return (
         <Link
           className="inline-block px-4 py-2 text-teal-900 bg-teal-100 rounded-md shadow"
@@ -66,12 +73,17 @@ const Job = ({
     }
     if (profile?.userRef.role === 'jobSeeker') {
       return (
-        <Link
-          to={`/jobs/${match.params.id}/new`}
-          className="block px-24 py-2 text-center text-white bg-teal-600 rounded-md md:inline-block"
+        <div
+          onClick={() => {
+            console.log("performing on click")
+            dispatch({type: 'title', title: 'New Application'})
+            dispatch({type: 'New Application', jobId: jobId})
+          }}
+          to={`/jobs/${jobId}/new`}
+          className="block px-24 py-2 text-center text-white bg-teal-600 rounded-md md:inline-block cursor-pointer"
         >
           Apply
-        </Link>
+        </div>
       )
     }
 
@@ -80,7 +92,7 @@ const Job = ({
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div>
         {loading ? (
           <Spinner />
@@ -137,12 +149,16 @@ const Job = ({
                     {selectedJob.positionTitle}
                   </h1>
                   {profile?._id === selectedJob.recruiter?._id && (
-                    <Link
-                      to={`/jobs/${match.params.id}/edit`}
+                    <div
+                    onClick={() => {
+                      dispatch({type: 'title', title: 'Edit'})
+                      dispatch({type: 'Edit Job', jobId: jobId})
+                    }}
+                      to={`/jobs/${jobId}/edit`}
                       className="inline-block px-4 py-2 mt-4 text-white bg-teal-600 rounded"
                     >
                       Edit Job
-                    </Link>
+                    </div>
                   )}
                 </div>
                 <div className="grid sm:block grid-cols-2 gap-2 mt-4 text-sm text-gray-500 md:mt-0 md:gap-4 md:w-1/2">
@@ -271,7 +287,7 @@ const Job = ({
           </main>
         )}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

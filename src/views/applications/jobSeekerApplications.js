@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../store/application'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import noJobsImg from '../../assets/images/No-Jobs.png'
 // const tabs = [
 //     { name: 'Submitted', href: '#', count: '52', current: false },
@@ -22,16 +22,22 @@ const JobSeekerApplicationContainer = ({
   application,
 }) => {
   const applicationData = useSelector((state) => state.application)
+  const dispatch = useDispatch()
+
   useEffect(() => {
     getProfileApplications()
   }, [getProfileApplications])
 
   const renderApplications = () => {
     return applicationData?.applications.map((app, index) => (
-      <Link
+      <div
+        onClick={() => {
+          dispatch({ type: 'title', title: 'My Applications' })
+          dispatch({ type: 'Application', appId: app._id })
+        }}
         key={index}
         to={`/applications/${app._id}`}
-        className="flex flex-col border border-gray-100 rounded-md shadow-md"
+        className="flex flex-col border border-gray-100 rounded-md shadow-md cursor-pointer"
       >
         <div className="flex-grow px-8 pt-8">
           <div className="flex items-center">
@@ -44,7 +50,7 @@ const JobSeekerApplicationContainer = ({
             </div> */}
 
             {app?.job?.organization?.orgImage &&
-            app?.job?.organization?.orgImage?.fullUrl ? (
+              app?.job?.organization?.orgImage?.fullUrl ? (
               <div
                 className="flex items-center justify-center w-16 h-16 text-3xl font-bold text-blue-900 bg-blue-300 rounded-md font-baskerville"
                 style={{
@@ -66,8 +72,8 @@ const JobSeekerApplicationContainer = ({
                 {!app?.job
                   ? ''
                   : app?.job.organization
-                  ? app?.job.organization.name.slice(0, 25)
-                  : ''}
+                    ? app?.job.organization.name.slice(0, 25)
+                    : ''}
               </p>
               <p>{!app?.job ? '' : app?.job?.location && app?.job?.location}</p>
             </div>
@@ -90,20 +96,20 @@ const JobSeekerApplicationContainer = ({
         <p className="p-2 mt-4 text-center bg-green-100 rounded-b">
           Applied on {new Date(app?.createdAt).toLocaleDateString()}
         </p>
-      </Link>
+      </div>
     ))
   }
 
   return (
     <div>
       <div className="mb-48 font-inter">
-        <header>
+        {/* <header>
           <div className="h-32 px-4 pt-12 bg-teal-600 sm:px-6 lg:px-8">
             <h1 className="max-w-5xl mx-auto text-3xl font-bold leading-tight text-white">
               My Applications
             </h1>
           </div>
-        </header>
+        </header> */}
         <main className="max-w-5xl px-4 mx-auto md:px-0">
           <div className="">
             <div className="mt-10">

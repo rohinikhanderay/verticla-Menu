@@ -46,7 +46,8 @@ const Jobs = ({ jobs, profile }) => {
   const dispatch = useDispatch()
   const redMoreBtn = (job) => {
     if (job?._id) {
-      history.push(`/jobs/${job?._id}`)
+      // history.push(`/jobs/${job?._id}`)
+      dispatch({type: 'JobDesc', jobId: job?._id})
     } else {
       window.open(
         job?.url,
@@ -235,10 +236,10 @@ const Jobs = ({ jobs, profile }) => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container m-auto px-5">
         <div className="mb-3 mt-5 w-11/12 m-auto xs:mb-14">
-          <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl">
+          <h1 className="container m-auto lg:text-5xl md:text-4xl flex items-center text-3xl font-semibold xs:text-2xl hidden">
             <svg
               viewBox="0 0 32 32"
               className="inline mr-3"
@@ -663,7 +664,6 @@ const Jobs = ({ jobs, profile }) => {
                         </div>
                         <div
                           className="absolute top-2/4 right-3"
-                          className="absolute top-2/4 right-3"
                         >
                           <svg
                             style={{ cursor: 'pointer' }}
@@ -734,6 +734,7 @@ const Jobs = ({ jobs, profile }) => {
                 }}
                 className="btn px-10 sm:px-16 py-3 sm:pt-3 sm:pb-3 xs:pl-0 xs:pr-0 bg-teal-600 text-white rounded-xl text-base	 mt-5	font-medium sm:mr-0 sm:w-full sm:mb-5 md:w-auto md:mb-0"
                 onClick={() => {
+
                   history.push(`/profiles/${profile?.profile?._id}`)
                 }}
               />
@@ -1439,7 +1440,7 @@ const Jobs = ({ jobs, profile }) => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   )
 }

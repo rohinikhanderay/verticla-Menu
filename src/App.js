@@ -209,7 +209,7 @@ function App() {
               exact 
             />
 
-            <Route path="/dashboard" component={withTracker(RequireAuth(DashboardNew))} exact />
+            <Route path="/dashboard" component={withTracker(RequireAuth(Dashboard))} exact />
             <Route path="/privacypolicy" component={withTracker(PrivacyPolicy)} exact />
             <Route path="/termsofuse" component={withTracker(TermsOfUse)} exact />
             <Route
@@ -233,11 +233,13 @@ function App() {
               exact
             />
             <Route path="/about" component={withTracker(About)} exact />
+
             <Route
               path="/skill/:id"
               component={withTracker(RequireAuth(Skill))}
               exact
             />
+            
             <Route path="/" component={withTracker(Home)} exact />
             <Route
               path="/candidates"
