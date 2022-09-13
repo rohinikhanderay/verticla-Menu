@@ -61,6 +61,13 @@ module.exports = {
         '56px': '56px',
         '73px': '73px',
         '40px': '40px',
+        '32px': '32px',
+        '24px': '24px',
+      },
+
+      width: {
+        '32px': '32px',
+        '24px': '24px',
       },
 
       borderRadius: {

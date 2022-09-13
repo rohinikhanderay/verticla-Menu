@@ -155,7 +155,7 @@ const DashboardNew = ({ getProfile }) => {
         dispatch({ type: 'title', title: 'My Profile' })
         dispatch({ type: 'Profile' })
       }}>
-        <div className="w-7 h-7 bg-blue-100 rounded-full">
+        <div className="w-32px h-32px bg-blue-100 rounded-full">
           {data?.profileImg[0] ? (
             <div
               style={{
@@ -178,7 +178,7 @@ const DashboardNew = ({ getProfile }) => {
           )}
         </div>
 
-        <div className='ml-3'>
+        <div className='ml-4'>
           <p className={classNames(component.componentName === 'Profile' ? "text-base text-gray333 font-nunito font-bold" : "text-base text-bg_gray666 font-nunito font-bold")}>
             {data?.fullName}
           </p>
@@ -249,7 +249,7 @@ const DashboardNew = ({ getProfile }) => {
 
                     </span>
 
-                    <img src={CloseIcon} className='w-5 h-5' onClick={() => {
+                    <img src={CloseIcon} className='w-8 h-8' onClick={() => {
                       setSidebarOpen(false)
                     }} />
 
@@ -271,7 +271,7 @@ const DashboardNew = ({ getProfile }) => {
                     }}>
 
                       <div className='flex flex-row px-3 items-center'>
-                        <div className="w-6 h-6 bg-blue-100 rounded-full">
+                        <div className="w-24px h-24px bg-blue-100 rounded-full">
                           {state?.profile?.profile?.profileImg[0] ? (
                             <div
                               style={{
@@ -294,7 +294,7 @@ const DashboardNew = ({ getProfile }) => {
                           )}
                         </div>
                         {/* for small screen */}
-                        <div className='ml-2'>
+                        <div className='ml-4'>
                           <p className={classNames(component.componentName === 'Profile' ? "text-base text-gray333 font-nunito font-bold" : "text-base text-bg_gray666 font-nunito font-bold")}>
                             {state?.profile?.profile?.fullName}
                           </p>
@@ -352,13 +352,13 @@ const DashboardNew = ({ getProfile }) => {
                                   component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
                                       item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                      'mr-3 flex-shrink-0 h-5 w-5'
+                                      'mr-5 flex-shrink-0 h-24px w-24px'
                                     )}
                                     aria-hidden="true"
                                   /> : <img src={item.icon}
                                   className={classNames(
                                     item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                    'mr-3 flex-shrink-0 h-5 w-5'
+                                    'mr-5 flex-shrink-0 h-24px w-24px'
                                   )}
                                   aria-hidden="true"
                                 />
@@ -508,13 +508,13 @@ const DashboardNew = ({ getProfile }) => {
                           component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(
                               item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-3 flex-shrink-0 h-4 w-4 ml-2'
+                              'mr-5 flex-shrink-0 h-24px w-24px ml-2'
                             )}
                             aria-hidden="true"
                           /> : <img src={item.icon}
                           className={classNames(
                             item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-3 flex-shrink-0 h-4 w-4 ml-2'
+                            'mr-5 flex-shrink-0 h-24px w-24px ml-2'
                           )}
                           aria-hidden="true"
                         />

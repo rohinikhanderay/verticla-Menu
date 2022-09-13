@@ -150,7 +150,7 @@ const JobPartnerDashboard = ({ getProfile }) => {
         dispatch({ type: 'title', title: 'My Profile' })
         dispatch({ type: 'Profile' })
       }}>
-        <div className="w-7 h-7 bg-blue-100 rounded-full">
+        <div className="w-32px h-32px flex justify-center items-center bg-blue-100 rounded-full">
           {data?.profileImg[0] ? (
             <div
               style={{
@@ -244,7 +244,7 @@ const JobPartnerDashboard = ({ getProfile }) => {
 
                     </span>
 
-                    <img src={CloseIcon} className='w-5 h-5' onClick={() => {
+                    <img src={CloseIcon} className='w-8 h-8' onClick={() => {
                       setSidebarOpen(false)
                     }} />
 
@@ -265,8 +265,8 @@ const JobPartnerDashboard = ({ getProfile }) => {
                     <div className={classNames(component.componentName === 'Profile' ? 'w-1 bg-black h-full' : 'w-1 bg-gray-100 h-full')}></div>
                     <div className={classNames(component.componentName === 'Profile' ? 'flex items-center cursor-pointer bg-gray-100 py-3 w-full' : 'flex items-center cursor-pointer bg-white py-3 w-full')} >
 
-                      <div className='flex flex-row px-3 items-center'>
-                        <div className="w-6 h-6 bg-blue-100 rounded-full">
+                      <div className='flex flex-row px-4 items-center'>
+                        <div className="w-32px h-32px flex justify-center items-center bg-blue-100 rounded-full">
                           {state?.profile?.profile?.profileImg[0] ? (
                             <div
                               style={{
@@ -361,18 +361,18 @@ const JobPartnerDashboard = ({ getProfile }) => {
 
                             <div className='flex' >
                               <div className={classNames(component.componentName === item.name ? 'w-1 bg-black h-56px' : 'w-1 bg-gray-100 h-56px')}></div>
-                              <div className={classNames(component.componentName === item.name ? 'flex px-4 py-3 text-bg_gray333 text-base items-center' : 'flex px-4 py-3 text-bg_gray666 text-base items-center')}>
+                              <div className={classNames(component.componentName === item.name ? 'flex px-5 py-3 text-bg_gray333 text-base items-center' : 'flex px-5 py-3 text-bg_gray666 text-base items-center')}>
                                 {
                                   component.componentName === item.name ? <img src={item.iconFilled}
                                     className={classNames(
                                       item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                      'mr-3 flex-shrink-0 h-5 w-5'
+                                      'mr-4 flex-shrink-0 h-24px w-24px'
                                     )}
                                     aria-hidden="true"
                                   /> : <item.icon
                                     className={classNames(
                                       item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                      'mr-3 flex-shrink-0 h-5 w-5'
+                                      'mr-4 flex-shrink-0 h-24px w-24px'
                                     )}
                                     aria-hidden="true"
                                   />
@@ -538,13 +538,13 @@ const JobPartnerDashboard = ({ getProfile }) => {
                           component.componentName === item.name ? <img src={item.iconFilled}
                             className={classNames(
                               item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-3 flex-shrink-0 h-4 w-4 ml-2'
+                              'mr-5 flex-shrink-0 h-4 w-4 ml-2'
                             )}
                             aria-hidden="true"
                           /> : <item.icon
                             className={classNames(
                               item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-3 flex-shrink-0 h-5 w-5 mx-2'
+                              'mr-5 flex-shrink-0 h-5 w-5 mx-2'
                             )}
                             aria-hidden="true"
                           />
